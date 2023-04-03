@@ -39,3 +39,11 @@ If necessary, new dependencies can be added to the requirements.txt file using t
 
 This will add new dependencies and update existing ones if necessary.
 ### Note: Make sure to execute this command while inside the virtual environment (venv).
+
+### login details for admin page
+
+**email:** lesBoss@django.com
+
+**username:** lesBoss
+
+**password:** popcorn06
