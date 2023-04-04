@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-class Courses(models.Model):
+class Course(models.Model):
     course_hours = models.IntegerField(null=True)
     course_date = models.DateField()
     course_duration = models.DurationField()
@@ -19,7 +19,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
-    courses = models.ManyToManyField(Courses)
+    courses = models.ManyToManyField(Course)
     hours_of_taken_courses = models.IntegerField(null=True)
     hours_of_paid_courses = models.IntegerField(null=True)
 
