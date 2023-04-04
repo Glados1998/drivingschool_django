@@ -4,12 +4,11 @@ from django.db import models
 # Create your models here.
 
 class Course(models.Model):
-    appointment = models.DateTimeField(null=True)
-    duration = models.DurationField()
-    place = models.CharField(max_length=50)
-    student = models.ForeignKey('User', on_delete=models.PROTECT)
-    instructor = models.ForeignKey('User', on_delete=models.PROTECT)
-    agency = models.ForeignKey('Agency', on_delete=models.PROTECT)
+    course_appointment = models.DateTimeField(null=True)
+    course_duration = models.DurationField()
+    course_place = models.CharField(max_length=50)
+    course_attending_user = models.ManyToManyField('User')
+    agency_object = models.ForeignKey('Agency', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.instructor.first_name + " " + self.instructor.last_name + " " + self.appointment + " " + self.duration
@@ -57,8 +56,9 @@ class Quiz(models.Model):
 
 
 class Question(models.Model):
+    related_quiz = models.ForeignKey(Quiz, on_delete=models.PROTECT)
     question = models.CharField(max_length=200)
-    answers = models.ManyToManyField('Answer')
+    answer = models.CharField(max_length=200)
 
     def __str__(self):
         return self.question
