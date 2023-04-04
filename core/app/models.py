@@ -4,8 +4,7 @@ from django.db import models
 # Create your models here.
 
 class Course(models.Model):
-    course_hours = models.IntegerField(null=True)
-    course_date = models.DateField()
+    course_date_hour_of_appointment = models.DateTimeField(null=True)
     course_duration = models.DurationField()
     course_place = models.CharField(max_length=50)
     course_instructor = models.ForeignKey('Instructor', on_delete=models.CASCADE)

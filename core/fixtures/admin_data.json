@@ -1,0 +1,32 @@
+[
+  {
+    "model": "app.Admin",
+    "pk": 1,
+    "fields": {
+      "last_name": "Admin",
+      "first_name": "Admin",
+      "email": "a.admin@localhost.com",
+      "password": "password"
+    }
+  },
+  {
+    "model": "app.Admin",
+    "pk": 2,
+    "fields": {
+      "last_name": "jerome",
+      "first_name": "Greder",
+      "email": "j.greder@localhost.com",
+      "password": "12345"
+    }
+  },
+  {
+    "model": "app.Admin",
+    "pk": 3,
+    "fields": {
+      "last_name": "Jason",
+      "first_name": "Thomas",
+      "email": "j.thomas@localhost.com",
+      "password": "basel"
+    }
+  }
+]

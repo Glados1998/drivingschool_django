@@ -1,0 +1,42 @@
+[
+  {
+    "model": "app.Instructor",
+    "pk": 1,
+    "fields": {
+      "last_name": "Freeman",
+      "first_name": "Morgan",
+      "email": "f.morgan@black-mesa.com",
+      "password": "123456"
+    }
+  },
+  {
+    "model": "app.Instructor",
+    "pk": 2,
+    "fields": {
+      "last_name": "Doe",
+      "first_name": "John",
+      "email": "John@Doe.com",
+      "password": "whoAreYou?"
+    }
+  },
+  {
+    "model": "app.Instructor",
+    "pk": 3,
+    "fields": {
+      "last_name": "Doe",
+      "first_name": "Jane",
+      "email": "",
+      "password": "WhoIsShe?"
+    }
+  },
+  {
+    "model": "app.Instructor",
+    "pk": 4,
+    "fields": {
+      "last_name": "Palade",
+      "first_name": "Kevin",
+      "email": "k.palade@kmo.com",
+      "password": "123456"
+    }
+  }
+]
