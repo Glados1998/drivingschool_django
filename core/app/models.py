@@ -7,12 +7,9 @@ class Course(models.Model):
     course_appointment = models.DateTimeField(null=True)
     course_duration = models.DurationField()
     course_place = models.CharField(max_length=50)
-    course_attending_user = models.ManyToManyField('User')
+    course_attending_user = models.ForeignKey('User', on_delete=models.CASCADE, limit_choices_to={'role': 1}, related_name='student+', null=True)
+    course_attending_instructor = models.ForeignKey('User', on_delete=models.CASCADE, limit_choices_to={'role': 2}, related_name='instructor+', null=True)
     agency_object = models.ForeignKey('Agency', on_delete=models.PROTECT, null=True)
-
-    def __str__(self):
-        return self.instructor.first_name + " " + self.instructor.last_name + " " + self.appointment + " " + self.duration
-
 
 class User(models.Model):
     STUDENT = 1
@@ -31,7 +28,6 @@ class User(models.Model):
     first_name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
-    courses = models.ManyToManyField(Course)
     role = models.PositiveSmallIntegerField(choices=USER_ROLES, default=1, null=True)
     agency = models.ForeignKey('Agency', on_delete=models.PROTECT)
 
@@ -43,7 +39,6 @@ class Agency(models.Model):
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=20)
     email = models.EmailField()
-    courses = models.ManyToManyField(Course)
     zipcode = models.CharField(max_length=10)
 
 
