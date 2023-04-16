@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+{% block document_title %}
+user-dashboard
+{% endblock %}
+
+{% block content %}
+    {% if logged_in_user.is_authenticated %}
+    <h2>user-dashboard</h2>
+        <div>
+        <p>Welcome {{ logged_in_user.email }}</p>
+            {% if logged_in_user.role == 3 or logged_in_user.role == 4 %}
+            {% include 'includes/cours-admin-panel.html' %}
+            {% include 'includes/student-admin-panel.html' %}
+            {% endif %}
+        </div>
+    {% else %}
+        <div>
+    <h2>user-dashboard</h2>
+       <div>
+           <p>Sorry you can't access the dashboard if you aren't logged in</p>
+           <a href="{% url 'login' %}">login</a>
+       </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'user-dashboard' %}">user-dashboard</a></li>
+            <li><a href="{% url 'login' %}">login</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

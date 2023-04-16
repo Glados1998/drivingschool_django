@@ -1,0 +1,16 @@
+<div>
+    <div>
+        {% for cours in courses %}
+            <p>{{ cours.location }}</p>
+            <p>{{ cours.pk }}</p>
+            <a href="{% url 'course-edit-delete' cours.pk %}">Edit/delete</a>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="{% url 'course-creation' %}" method="post">
+            {% csrf_token %}
+            {{ course_add_form.as_p }}
+            <input type="submit" value="Add Course">
+        </form>
+    </div>
+</div>
