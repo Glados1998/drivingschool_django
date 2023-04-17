@@ -1,0 +1,17 @@
+<div>
+<h1>Instructor panel</h1>
+    <div>
+        {% for instructor in instructors %}
+            <p>{{ instructor.email }}</p>
+            <p>{{ instructor.pk }}</p>
+            <a href="{% url 'instructor-edit-delete' instructor.pk %}">Edit/delete</a>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="{% url 'instructor-creation' %}" method="post">
+            {% csrf_token %}
+            {{ instructor_add_form.as_p }}
+            <input type="submit" value="Add new instructors">
+        </form>
+    </div>
+</div>

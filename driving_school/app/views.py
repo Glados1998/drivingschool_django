@@ -2,7 +2,9 @@ from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .forms import UserCreationForm, UserEditForm, CourseCreationForm, CourseEditForm, StudentCreationForm, StudentEditForm
+from .forms import UserCreationForm, UserEditForm, CourseCreationForm, CourseEditForm, StudentCreationForm, \
+    StudentEditForm, InstructorCreationForm, InstructorEditForm, \
+    SecretaryCreationForm, SecretaryEditForm, AdminCreationForm, AdminEditForm
 from .models import Course, User
 
 
@@ -36,8 +38,12 @@ def user_panel(request):
     secretaries = User.objects.filter(role=4)
     return render(request, 'app/user-dashboard.html',
                   {'logged_in_user': request.user, 'course_add_form': course_add_form, 'user_add_form': user_add_form,
-                   'student_add_form': student_add_form, 'courses': courses, 'students': students, 'instructors': instructors, 'admins': admins,
-                   'secretaries': secretaries, 'all_users': all_users, 'all_personal': all_personal})
+                   'student_add_form': student_add_form, 'instructor_add_form': InstructorCreationForm,
+                   'instructor_edit_form': InstructorEditForm, 'secretary_add_form': SecretaryCreationForm,
+                   'secretary_edit_form': SecretaryEditForm, 'admin_add_form': AdminCreationForm,
+                   'admin_edit_form': AdminEditForm, 'courses': courses, 'students': students,
+                   'instructors': instructors, 'admins': admins, 'secretaries': secretaries, 'all_users': all_users,
+                   'all_personal': all_personal})
 
 
 def logout_def(request):
@@ -98,3 +104,79 @@ def student_edit_delete(request, student_pk):
     return render(request, 'crud/edit-student.html', {'student_edit_form': student_edit_form})
 
 
+def instructor_creation(request):
+    if request.method == 'POST':
+        instructor_add_form = InstructorCreationForm(request.POST)
+        if instructor_add_form.is_valid():
+            instructor_add_form.save()
+            return render(request, 'app/user-dashboard.html', {'instructor_add_form': instructor_add_form})
+    else:
+        instructor_add_form = InstructorCreationForm()
+    return render(request, 'app/user-dashboard.html', {'instructor_add_form': instructor_add_form})
+
+
+def instructor_edit_delete(request, instructor_pk):
+    instance = User.objects.get(pk=instructor_pk)
+    if 'edit' in request.POST:
+        instructor_edit_form = InstructorEditForm(request.POST, instance=instance)
+        if instructor_edit_form.is_valid():
+            instructor_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        instructor_edit_form = InstructorEditForm(instance=instance)
+    return render(request, 'crud/edit-instructor.html', {'instructor_edit_form': instructor_edit_form})
+
+
+def secretary_creation(request):
+    if request.method == 'POST':
+        secretary_add_form = SecretaryCreationForm(request.POST)
+        if secretary_add_form.is_valid():
+            secretary_add_form.save()
+            return render(request, 'app/user-dashboard.html', {'secretary_add_form': secretary_add_form})
+    else:
+        secretary_add_form = SecretaryCreationForm()
+    return render(request, 'app/user-dashboard.html', {'secretary_add_form': secretary_add_form})
+
+
+def secretary_edit_delete(request, secretary_pk):
+    instance = User.objects.get(pk=secretary_pk)
+    if 'edit' in request.POST:
+        secretary_edit_form = SecretaryEditForm(request.POST, instance=instance)
+        if secretary_edit_form.is_valid():
+            secretary_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        secretary_edit_form = SecretaryEditForm(instance=instance)
+    return render(request, 'crud/edit-secretary.html', {'secretary_edit_form': secretary_edit_form})
+
+
+def admin_creation(request):
+    if request.method == 'POST':
+        admin_add_form = AdminCreationForm(request.POST)
+        if admin_add_form.is_valid():
+            admin_add_form.save()
+            return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
+    else:
+        admin_add_form = AdminCreationForm()
+    return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
+
+
+def admin_edit_delete(request, admin_pk):
+    instance = User.objects.get(pk=admin_pk)
+    if 'edit' in request.POST:
+        admin_edit_form = AdminEditForm(request.POST, instance=instance)
+        if admin_edit_form.is_valid():
+            admin_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        admin_edit_form = AdminEditForm(instance=instance)
+    return render(request, 'crud/edit-admin.html', {'admin_edit_form': admin_edit_form})

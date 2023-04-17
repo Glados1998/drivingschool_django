@@ -1,25 +1,36 @@
 {% extends 'app/base.html' %}
 {% block document_title %}
-user-dashboard
+    user-dashboard
 {% endblock %}
 
 {% block content %}
     {% if logged_in_user.is_authenticated %}
-    <h2>user-dashboard</h2>
+        <h2>user-dashboard</h2>
         <div>
-        <p>Welcome {{ logged_in_user.email }}</p>
-            {% if logged_in_user.role == 3 or logged_in_user.role == 4 %}
-            {% include 'includes/cours-admin-panel.html' %}
-            {% include 'includes/student-admin-panel.html' %}
+            <p>Welcome {{ logged_in_user.email }}</p>
+            {% if logged_in_user.role == 1 %}
+                hello student
+            {% elif logged_in_user.role == 2  %}
+                hello instructor
+            {% elif logged_in_user.role == 3  %}
+                hello admin
+            {% elif logged_in_user.role == 4  %}
+                hello secretary
             {% endif %}
         </div>
     {% else %}
         <div>
-    <h2>user-dashboard</h2>
-       <div>
-           <p>Sorry you can't access the dashboard if you aren't logged in</p>
-           <a href="{% url 'login' %}">login</a>
-       </div>
+            <h2>user-dashboard</h2>
+            <div>
+                <p>Sorry you can't access the dashboard if you aren't logged in</p>
+                <a href="{% url 'login' %}">login</a>
+            </div>
         </div>
     {% endif %}
 {% endblock %}
+
+{% include 'settings/cours-admin-panel.html' %}
+                {% include 'settings/student-admin-panel.html' %}
+                {% include 'settings/instrcutor-admin-panel.html' %}
+                {% include 'settings/secretary-admin-panel.html' %}
+                {% include 'settings/admin-admin-panel.html' %}
