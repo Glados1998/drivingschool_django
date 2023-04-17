@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+
 <form method="post">
     {% csrf_token %}
     {{ course_edit_form.as_p }}
