@@ -1,0 +1,24 @@
+<div>
+    <h3>
+        Account details {% if logged_in_user.name %} {{ logged_in_user.name }} {% else %}
+        {{ logged_in_user.email }} {% endif %}
+    </h3>
+    <div>
+        <div>
+            <h4>Courses balance:</h4>
+            <div>
+                Paid courses hours: {{ logged_in_user.paid_courses|length }}
+                Taken courses hours: {{ logged_in_user.taken_courses|length }}
+            </div>
+        </div>
+        <div>
+            <h4>Courses agenda:</h4>
+            <div>
+                under construction...
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

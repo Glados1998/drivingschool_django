@@ -9,7 +9,9 @@
         <div>
             <p>Welcome {{ logged_in_user.email }}</p>
             {% if logged_in_user.role == 1 %}
-                hello student
+                <div>
+                    {% include 'settings/student-details.html' %}
+                </div>
             {% elif logged_in_user.role == 2  %}
                 hello instructor
             {% elif logged_in_user.role == 3  %}
