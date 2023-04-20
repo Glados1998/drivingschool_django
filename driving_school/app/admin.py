@@ -5,7 +5,7 @@ from .models import User, Course
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'name', 'role', 'assigned_courses', 'paid_course_hours', 'taken_course_hours')}),
+        (None, {'fields': ('email', 'password', 'name', 'role', 'assigned_courses', 'assigned_students', 'paid_course_hours', 'taken_course_hours')}),
         ('Permissions', {'fields': (
             'is_active',
             'is_staff',

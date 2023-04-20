@@ -1,0 +1,10 @@
+<div>
+    <h3>Your assigned course details</h3>
+    {% for course in user.courses.all %}
+        {{ course.location }}
+        {{ course.date }}
+        {{ course.time }}
+    {% empty %}
+        <p>There are no assigned students</p>
+    {% endfor %}
+</div>

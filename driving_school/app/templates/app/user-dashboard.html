@@ -14,10 +14,17 @@
                 </div>
             {% elif logged_in_user.role == 2  %}
                 hello instructor
+                {% include 'settings/instrcutor-course-details.html' %}
+                {% include 'settings/instrcutor-student-details.html' with assigned_students=user.assigned_students.all  %}
+                {% include 'settings/cours-admin-panel.html' %}
             {% elif logged_in_user.role == 3  %}
                 hello admin
+                {% include 'settings/all_users-admin-panel.html'%}
             {% elif logged_in_user.role == 4  %}
                 hello secretary
+                {% include 'settings/student-admin-panel.html'%}
+                {% include 'settings/instrcutor-admin-panel.html'%}
+
             {% endif %}
         </div>
     {% else %}
@@ -30,9 +37,3 @@
         </div>
     {% endif %}
 {% endblock %}
-
-{% include 'settings/cours-admin-panel.html' %}
-                {% include 'settings/student-admin-panel.html' %}
-                {% include 'settings/instrcutor-admin-panel.html' %}
-                {% include 'settings/secretary-admin-panel.html' %}
-                {% include 'settings/admin-admin-panel.html' %}

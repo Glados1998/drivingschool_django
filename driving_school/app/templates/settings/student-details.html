@@ -1,6 +1,6 @@
 <div>
     <h3>
-        Account details {% if logged_in_user.name %} {{ logged_in_user.name }} {% else %}
+        Account details of {% if logged_in_user.name %} {{ logged_in_user.name }} {% else %}
         {{ logged_in_user.email }} {% endif %}
     </h3>
     <div>
@@ -12,9 +12,27 @@
             </div>
         </div>
         <div>
-            <h4>Courses agenda:</h4>
+            <h4>Your courses</h4>
             <div>
-                under construction...
+                <table>
+                    <tr>
+                        <th>Course location</th>
+                        <th>Course time</th>
+                        <th>Course date</th>
+                        <th>Course instructor</th>
+                    </tr>
+                    {% for assigned_cours in logged_in_user.assigned_courses.all %}
+                        <tr>
+                            <td>{{ assigned_cours.location }}</td>
+                            <td>{{ assigned_cours.time }}</td>
+                            <td>{{ assigned_cours.date }}</td>
+                            <td>{{ assigned_cours.instructor }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div>
+                agenda still under construction...
             </div>
         </div>
     </div>

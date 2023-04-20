@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserCreationForm, UserEditForm, CourseCreationForm, CourseEditForm, StudentCreationForm, \
     StudentEditForm, InstructorCreationForm, InstructorEditForm, \
-    SecretaryCreationForm, SecretaryEditForm, AdminCreationForm, AdminEditForm
+    SecretaryCreationForm, SecretaryEditForm
 from .models import Course, User
 
 
@@ -26,9 +26,6 @@ def login_page(request):
 
 
 def user_panel(request):
-    course_add_form = CourseCreationForm()
-    user_add_form = UserCreationForm()
-    student_add_form = StudentCreationForm()
     courses = Course.objects.all()
     all_users = User.objects.all()
     all_personal = User.objects.filter(role=2 | 3 | 4)
@@ -37,11 +34,10 @@ def user_panel(request):
     admins = User.objects.filter(role=3)
     secretaries = User.objects.filter(role=4)
     return render(request, 'app/user-dashboard.html',
-                  {'logged_in_user': request.user, 'course_add_form': course_add_form, 'user_add_form': user_add_form,
-                   'student_add_form': student_add_form, 'instructor_add_form': InstructorCreationForm,
+                  {'logged_in_user': request.user, 'course_add_form': CourseCreationForm, 'user_add_form': UserCreationForm,
+                   'user_edit_form': UserEditForm, 'student_add_form': StudentCreationForm, 'instructor_add_form': InstructorCreationForm,
                    'instructor_edit_form': InstructorEditForm, 'secretary_add_form': SecretaryCreationForm,
-                   'secretary_edit_form': SecretaryEditForm, 'admin_add_form': AdminCreationForm,
-                   'admin_edit_form': AdminEditForm, 'courses': courses, 'students': students,
+                   'secretary_edit_form': SecretaryEditForm, 'courses': courses, 'students': students,
                    'instructors': instructors, 'admins': admins, 'secretaries': secretaries, 'all_users': all_users,
                    'all_personal': all_personal})
 
@@ -158,19 +154,19 @@ def secretary_edit_delete(request, secretary_pk):
 
 def admin_creation(request):
     if request.method == 'POST':
-        admin_add_form = AdminCreationForm(request.POST)
+        admin_add_form = UserCreationForm(request.POST)
         if admin_add_form.is_valid():
             admin_add_form.save()
             return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
     else:
-        admin_add_form = AdminCreationForm()
+        admin_add_form = UserCreationForm()
     return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
 
 
 def admin_edit_delete(request, admin_pk):
     instance = User.objects.get(pk=admin_pk)
     if 'edit' in request.POST:
-        admin_edit_form = AdminEditForm(request.POST, instance=instance)
+        admin_edit_form = UserEditForm(request.POST, instance=instance)
         if admin_edit_form.is_valid():
             admin_edit_form.save()
             return render(request, 'app/user-dashboard.html')
@@ -178,5 +174,5 @@ def admin_edit_delete(request, admin_pk):
         instance.delete()
         return render(request, 'app/user-dashboard.html')
     else:
-        admin_edit_form = AdminEditForm(instance=instance)
+        admin_edit_form = UserEditForm(instance=instance)
     return render(request, 'crud/edit-admin.html', {'admin_edit_form': admin_edit_form})

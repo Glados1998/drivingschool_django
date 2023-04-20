@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True)
     assigned_courses = models.ManyToManyField('Course', related_name='users', blank=True)
+    assigned_students = models.ManyToManyField('User', related_name='students', limit_choices_to={'role': 1}, blank=True)
     paid_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     taken_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     email = models.EmailField(max_length=254, unique=True)

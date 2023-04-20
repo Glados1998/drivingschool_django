@@ -1,0 +1,17 @@
+<div>
+<h1>School panel</h1>
+    <div>
+        {% for user in all_users %}
+            <p>{{ user.email }}</p>
+            <p>{{ user.pk }}</p>
+            <a href="{% url 'admin-edit-delete' user.pk %}">Edit/delete</a>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="{% url 'admin-creation' %}" method="post">
+            {% csrf_token %}
+            {{ user_add_form.as_p }}
+            <input type="submit" value="Add Course">
+        </form>
+    </div>
+</div>

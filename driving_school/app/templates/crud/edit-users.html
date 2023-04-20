@@ -3,7 +3,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ course_edit_form.as_p }}
+    {{ user_edit_form.as_p }}
         <button type="submit" name="edit">Edit</button>
         <button type="submit" name="delete">Delete</button>
 </form>
