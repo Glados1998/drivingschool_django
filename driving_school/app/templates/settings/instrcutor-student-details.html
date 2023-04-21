@@ -1,14 +1,24 @@
 <div>
     <h3>Your assigned students details</h3>
-    {% for assigned_student in assigned_students %}
-        {% if assigned_student.email %}
-            {{ assigned_student.email }}
-        {% elif assigned_student.name %}
-            {{ assigned_student.name }}
-        {% endif %}
-        {{ assigned_student.paid_course_hours }}
-        {{ assigned_student.taken_course_hours }}
-    {% empty %}
-        <p>There are no assigned students</p>
-    {% endfor %}
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Paid hours</th>
+            <th>Taken hours</th>
+        </tr>
+        <tr>
+            {% for assigned_student in assigned_students %}
+                <td> {% if assigned_student.email %}
+                    {{ assigned_student.email }}
+                    {% else %}
+                    {{ assigned_student.name }}
+                {% endif %} </td>
+                <td>{{ assigned_student.paid_course_hours }}</td>
+                <td>{{ assigned_student.taken_course_hours }}</td>
+            {% empty %}
+                <p>There are no assigned students</p>
+            {% endfor %}
+        </tr>
+    </table>
+
 </div>

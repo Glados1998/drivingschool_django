@@ -12,14 +12,14 @@
             </div>
         </div>
         <div>
-            <h4>Your courses</h4>
+            <h4>your assigned courses</h4>
             <div>
                 <table>
                     <tr>
-                        <th>Course location</th>
-                        <th>Course time</th>
-                        <th>Course date</th>
-                        <th>Course instructor</th>
+                        <th>Location</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Instructor</th>
                     </tr>
                     {% for assigned_cours in logged_in_user.assigned_courses.all %}
                         <tr>
