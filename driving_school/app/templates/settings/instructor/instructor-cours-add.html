@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div>
+        <h1>Course Creation</h1>
+        <div>
+            <form action="{% url 'course-creation' %}" method="post">
+                {% csrf_token %}
+                {{ course_add_form.as_p }}
+                <input type="submit" value="Add Course">
+            </form>
+            <a href="{% url 'user-dashboard' %}">Go back</a>
+        </div>
+    </div>
+{% endblock %}

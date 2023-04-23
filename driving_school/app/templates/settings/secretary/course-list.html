@@ -1,0 +1,34 @@
+<div>
+    <h2>Courses - list</h2>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Location</th>
+                <th scope="col">Course schedule</th>
+                <th scope="col">Attending Student</th>
+                <th scope="col">Attending Instructor</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <th scope="row">{{ course.pk }}</th>
+                    <td>{{ course.location }}</td>
+                    <td>{{ course.time_slot.start_time | date:"D j M Y H:i" }} - {{ course.time_slot.end_time | date:"D j M Y H:i" }}</td>
+                    <td>{{ course.get_student_details.email }}</td>
+                    <td>{{ course.get_instructor_details.email }}</td>
+                    <td><a class="btn btn-primary" href="{% url 'course-edit-delete' course.pk %}">Edit/delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
+    </div>
+
+</div>

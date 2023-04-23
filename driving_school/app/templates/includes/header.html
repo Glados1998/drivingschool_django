@@ -1,12 +1,27 @@
 <header>
-    <nav>
-        <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'user-dashboard' %}">user-dashboard</a></li>
-            <li><a href="{% url 'login' %}">login</a></li>
-            {% if request.user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">logout</a></li>
-            {% endif %}
-        </ul>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a href="{% url 'index' %}" class="navbar-brand">LesBoss - Driving School</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user-dashboard' %}">User dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
     </nav>
 </header>

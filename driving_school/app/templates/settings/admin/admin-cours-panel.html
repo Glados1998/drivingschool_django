@@ -15,8 +15,8 @@
             {% for cours in courses %}
                 <tr>
                     <td>{{ cours.location }}</td>
-                    <td>{{ course.date}}</td>
-                    <td>{{ course.time}}</td>
+                    <td>{{ course.date }}</td>
+                    <td>{{ course.time }}</td>
                     <td>{{ cours.pk }}</td>
                     <td><a href="{% url 'course-edit-delete' cours.pk %}">Edit/delete</a></td>
                 </tr>

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from django.db.models import Q
 
 
 class UserManager(BaseUserManager):
@@ -44,10 +45,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     ]
 
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True)
-    assigned_courses = models.ManyToManyField('Course', related_name='users', blank=True)
-    assigned_students = models.ManyToManyField('User', related_name='students', limit_choices_to={'role': 1}, blank=True)
     paid_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     taken_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    student_timeslots = models.ManyToManyField('TimeSlot', blank=True, related_name='students')
     email = models.EmailField(max_length=254, unique=True)
     name = models.CharField(max_length=254, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
@@ -68,6 +68,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Course(models.Model):
     location = models.CharField(max_length=254)
-    date = models.DateField()
-    time = models.TimeField()
-    instructor = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses', null=True, blank=True, limit_choices_to={'role': 2})
+    assigned_instructor = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_instructor',null=True, blank=True, limit_choices_to=Q(role=2))
+    assigned_student = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_student', null=True, blank=True, limit_choices_to=Q(role=1))
+    time_slot = models.ForeignKey('TimeSlot', on_delete=models.SET_NULL, related_name='courses_timeslot', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.location}'
+
+    def get_student_details(self):
+        return self.assigned_student
+
+    def get_instructor_details(self):
+        return self.assigned_instructor
+
+
+class TimeSlot(models.Model):
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.start_time} - {self.end_time}'

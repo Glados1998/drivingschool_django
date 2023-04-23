@@ -1,58 +1,56 @@
 from django import forms
-from .models import Course, User
+from .models import Course, User, TimeSlot
 
 
-class CourseCreationForm(forms.ModelForm):
+class CourseForm(forms.ModelForm):
+    time_slot = forms.ModelChoiceField(queryset=TimeSlot.objects.filter(is_available=True))
+
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ['location', 'assigned_instructor', 'assigned_student', 'time_slot']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk and self.instance.assigned_student:
+            self.fields['time_slot'].queryset = self.instance.assigned_student.student_timeslots.filter(
+                is_available=True)
+        elif 'assigned_student' in self.data:
+            try:
+                student = User.objects.get(id=self.data['assigned_student'])
+                self.fields['time_slot'].queryset = student.student_timeslots.filter(is_available=True)
+            except (ValueError, User.DoesNotExist):
+                pass
 
 
-class CourseEditForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        fields = '__all__'
-
-
-class UserCreationForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-
-class UserEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-
-class StudentCreationForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active', 'assigned_courses'}
+        fields = '__all__'
+
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = {'password', 'email', 'name', 'is_active', 'student_timeslots', 'paid_course_hours',
+                  'taken_course_hours'}
+        exclude = {'role'}
         widgets = {
             'password': forms.PasswordInput(),
             'email': forms.EmailInput(),
             'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
             'is_active': forms.CheckboxInput(),
-            'assigned_courses': forms.SelectMultiple(attrs={'class': 'form-control'}),
         },
         labels = {
             'password': 'Password',
             'email': 'Email',
             'name': 'Name',
-            'role': 'Role',
             'is_active': 'Active',
-            'assigned_courses': 'Assigned Courses',
         }
         help_texts = {
             'password': 'Password must be at least 8 characters long',
             'email': 'Please enter a valid email address',
             'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
             'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
         },
         error_messages = {
             'password': {
@@ -72,23 +70,18 @@ class StudentCreationForm(forms.ModelForm):
 
                 'invalid': 'Please select if the user is active',
             },
-            'assigned_courses': {
-                'invalid': 'Please select at least one course',
-            },
         }
 
 
-class StudentEditForm(forms.ModelForm):
+class InstructorForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = {'password', 'email', 'name', 'role', 'assigned_courses'}
+        fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
             'password': forms.PasswordInput(),
             'email': forms.EmailInput(),
             'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
             'is_active': forms.CheckboxInput(),
-            'assigned_courses': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
         labels = {
             'password': 'Password',
@@ -96,201 +89,60 @@ class StudentEditForm(forms.ModelForm):
             'name': 'Name',
             'role': 'Role',
             'is_active': 'Active',
-            'assigned_courses': 'Assigned Courses',
         }
         help_texts = {
             'password': 'Password must be at least 8 characters long',
             'email': 'Please enter a valid email address',
             'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
             'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
-        }
-        error_messages = {
-            'password': {
-                'min_length': 'Password must be at least 8 characters long',
-            },
-            'email': {
-                'invalid': 'Please enter a valid email address',
-            },
-            'name': {
-                'invalid': 'Please enter a valid name',
-            },
-            'role': {
-                'invalid': 'Please select a valid role',
-            },
-            'is_active': {
-                'invalid': 'Please select if the user is active',
-            },
-            'assigned_courses': {
-                'invalid': 'Please select at least one course',
-            },
         }
 
 
-class InstructorCreationForm(forms.ModelForm):
+class SecretaryForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
+        fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
             'password': forms.PasswordInput(),
             'email': forms.EmailInput(),
             'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
             'is_active': forms.CheckboxInput(),
         }
         labels = {
             'password': 'Password',
             'email': 'Email',
             'name': 'Name',
-            'role': 'Role',
             'is_active': 'Active',
         }
         help_texts = {
             'password': 'Password must be at least 8 characters long',
             'email': 'Please enter a valid email address',
             'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
             'is_active': 'Please select if the user is active',
             'assigned_courses': 'Please select at least one course',
         }
 
 
-class InstructorEditForm(forms.ModelForm):
+class AdminForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
+        fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
             'password': forms.PasswordInput(),
             'email': forms.EmailInput(),
             'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
             'is_active': forms.CheckboxInput(),
         }
         labels = {
             'password': 'Password',
             'email': 'Email',
             'name': 'Name',
-            'role': 'Role',
             'is_active': 'Active',
         }
         help_texts = {
             'password': 'Password must be at least 8 characters long',
             'email': 'Please enter a valid email address',
             'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
-            'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
-        }
-
-
-class SecretaryCreationForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
-        widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
-            'is_active': forms.CheckboxInput(),
-        }
-        labels = {
-            'password': 'Password',
-            'email': 'Email',
-            'name': 'Name',
-            'role': 'Role',
-            'is_active': 'Active',
-        }
-        help_texts = {
-            'password': 'Password must be at least 8 characters long',
-            'email': 'Please enter a valid email address',
-            'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
-            'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
-        }
-
-
-class SecretaryEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
-        widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
-            'is_active': forms.CheckboxInput(),
-        }
-        labels = {
-            'password': 'Password',
-            'email': 'Email',
-            'name': 'Name',
-            'role': 'Role',
-            'is_active': 'Active',
-        }
-        help_texts = {
-            'password': 'Password must be at least 8 characters long',
-            'email': 'Please enter a valid email address',
-            'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
-            'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
-        }
-
-
-class AdminCreationForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
-        widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
-            'is_active': forms.CheckboxInput(),
-        }
-        labels = {
-            'password': 'Password',
-            'email': 'Email',
-            'name': 'Name',
-            'role': 'Role',
-            'is_active': 'Active',
-        }
-        help_texts = {
-            'password': 'Password must be at least 8 characters long',
-            'email': 'Please enter a valid email address',
-            'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
-            'is_active': 'Please select if the user is active',
-            'assigned_courses': 'Please select at least one course',
-        }
-
-
-class AdminEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = {'password', 'email', 'name', 'role', 'is_active'}
-        widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'role': forms.Select(attrs={'class': 'form-control'}),
-            'is_active': forms.CheckboxInput(),
-        }
-        labels = {
-            'password': 'Password',
-            'email': 'Email',
-            'name': 'Name',
-            'role': 'Role',
-            'is_active': 'Active',
-        }
-        help_texts = {
-            'password': 'Password must be at least 8 characters long',
-            'email': 'Please enter a valid email address',
-            'name': 'Please enter a valid name',
-            'role': 'Please select a valid role',
             'is_active': 'Please select if the user is active',
             'assigned_courses': 'Please select at least one course',
         }

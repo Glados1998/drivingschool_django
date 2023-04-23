@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, Course
+from .models import User, Course, TimeSlot
 
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'name', 'role', 'assigned_courses', 'assigned_students', 'paid_course_hours', 'taken_course_hours')}),
+        (None, {'fields': ('email', 'password', 'name', 'role', 'paid_course_hours', 'taken_course_hours', 'student_timeslots')}),
         ('Permissions', {'fields': (
             'is_active',
             'is_staff',
@@ -33,3 +33,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Course)
+admin.site.register(TimeSlot)

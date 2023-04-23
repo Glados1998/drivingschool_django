@@ -21,12 +21,12 @@
                         <th>Date</th>
                         <th>Instructor</th>
                     </tr>
-                    {% for assigned_cours in logged_in_user.assigned_courses.all %}
+                    {% for student_course in student_courses %}
                         <tr>
-                            <td>{{ assigned_cours.location }}</td>
-                            <td>{{ assigned_cours.time }}</td>
-                            <td>{{ assigned_cours.date }}</td>
-                            <td>{{ assigned_cours.instructor }}</td>
+                            <td>{{ student_course.location }}</td>
+                            <td>{{ student_course.time }}</td>
+                            <td>{{ student_course.date }}</td>
+                            <td>{{ student_course.get_instructor_details.email }}</td>
                         </tr>
                     {% endfor %}
                 </table>

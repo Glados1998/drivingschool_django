@@ -1,0 +1,31 @@
+<div>
+    <h2>Instructors - list</h2>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">User status</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for instructor in instructors %}
+                <tr>
+                    <th scope="row">{{ instructor.pk }}</th>
+                    <td>{{ instructor.is_active }}</td>
+                    <td>{{ instructor.name }}</td>
+                    <td><a href="{% url 'instructor-details' instructor.pk %}">{{ instructor.email }}</a></td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'instructor-edit-delete' instructor.pk %}">Edit/delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div>
+            <a class="btn btn-primary" href="{% url 'instructor-creation' %}">Add instructor</a>
+        </div>
+    </div>
+</div>

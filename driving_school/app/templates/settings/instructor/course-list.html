@@ -1,0 +1,36 @@
+<div>
+    <h3>Your assigned courses details</h3>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Location</th>
+                <th scope="col">Time</th>
+                <th scope="col">Date</th>
+                <th scope="col">Attending Student</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for instructor_course in instructor_courses %}
+                <tr>
+                    <th scope="row">{{ instructor_course.pk }}</th>
+                    <td>{{ instructor_course.location }}</td>
+                    <td>{{ instructor_course.time }}</td>
+                    <td>{{ instructor_course.date }}</td>
+                    <td>
+                        <a href="{% url 'student-details' instructor_course.get_student_details.pk %}">{{ instructor_course.get_student_details.email }}</a>
+                    </td>
+                    <td><a class="btn btn-primary" href="{% url 'course-edit-delete' instructor_course.pk %}">Edit/delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
+    </div>
+
+</div>

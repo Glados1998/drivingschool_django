@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div>
+        <h3>Your assigned student details</h3>
+        {{ instructor.email }}
+        {{ instructor.name }}
+        {% for instructor_cours in instructor_courses %}
+            {{ instructor_cours.time_slot.start_time | date:"D j M Y H:i" }} -
+            {{ instructor_cours.time_slot.end_time | date:"D j M Y H:i" }}
+        {% endfor %}
+
+        <a href="{% url 'user-dashboard' %}">Go back</a>
+    </div>
+{% endblock %}
+
