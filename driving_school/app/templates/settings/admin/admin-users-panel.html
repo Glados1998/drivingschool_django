@@ -1,17 +1,32 @@
 <div>
-    <h1>School panel</h1>
     <div>
-        {% for user in all_users %}
-            <p>{{ user.email }}</p>
-            <p>{{ user.pk }}</p>
-            <a href="{% url 'admin-edit-delete' user.pk %}">Edit/delete</a>
-        {% endfor %}
+    <h1>Users panel</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col">ID</th>
+                <th class="col">Name</th>
+                <th class="col">Email</th>
+                <th class="col">User status</th>
+                <th class="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in all_users %}
+                <tr>
+                    <td>{{ user.pk }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{% url 'admin-edit-delete' user.pk %}">Edit/delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div>
+<a class="btn btn-primary" href="{% url 'admin-add-user' %}">Add user</a>
     </div>
-    <div>
-        <form action="{% url 'admin-creation' %}" method="post">
-            {% csrf_token %}
-            {{ user_add_form.as_p }}
-            <input type="submit" value="Add Course">
-        </form>
     </div>
 </div>

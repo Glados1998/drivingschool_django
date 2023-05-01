@@ -7,32 +7,44 @@
         <div>
             <h4>Courses balance:</h4>
             <div>
-                Paid courses hours: {{ logged_in_user.paid_courses|length }}
-                Taken courses hours: {{ logged_in_user.taken_courses|length }}
+                Paid course hours: {{ logged_in_user.paid_course_hours }}
+                Taken course hours: {{ logged_in_user.taken_course_hours }}
             </div>
         </div>
         <div>
             <h4>your assigned courses</h4>
             <div>
-                <table>
+                <table class="table">
+                    <thead>
                     <tr>
-                        <th>Location</th>
-                        <th>Time</th>
-                        <th>Date</th>
-                        <th>Instructor</th>
+                        <th class="col">Location</th>
+                        <th class="col">Start date/time</th>
+                        <th class="col">End date/time</th>
+                        <th class="col">Course duration</th>
+                        <th class="col">Attending instructor</th>
+                        <th class="col">Actions</th>
                     </tr>
-                    {% for student_course in student_courses %}
+                    </thead>
+                    <tbody>
+                    {% for courses in student_courses %}
                         <tr>
-                            <td>{{ student_course.location }}</td>
-                            <td>{{ student_course.time }}</td>
-                            <td>{{ student_course.date }}</td>
-                            <td>{{ student_course.get_instructor_details.email }}</td>
+                            <td class="col">{{ courses.location }}</td>
+                            <td class="col">{{ courses.time_slot.start_time | date:"D j M Y H:i" }}</td>
+                            <td class="col">{{ courses.time_slot.end_time | date:"D j M Y H:i" }}</td>
+                            <td class="col">{{ courses.time_slot.duration }}</td>
+                            <td class="col">{{ courses.get_instructor_details.email }}
+                                - {{ courses.get_instructor_details.name }}</td>
+                            <td class="col">
+                                <div class="btn-group">
+                                    <a href="{% url 'complete-course' courses.pk %}" class="btn btn-success">Complete course</a>
+                                    <a href="{% url 'cancel-course' courses.pk %}" class="btn btn-danger">Cancel
+                                        course</a>
+                                </div>
+                            </td>
                         </tr>
                     {% endfor %}
+                    </tbody>
                 </table>
-            </div>
-            <div>
-                agenda still under construction...
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
 
 {% block content %}
     {% if logged_in_user.is_authenticated %}
-        <h2>user-dashboard</h2>
+        <h2>Your dashboard</h2>
         <div>
             <p>Welcome {{ logged_in_user.email }}</p>
             {% if logged_in_user.role == 1 %}

@@ -6,8 +6,9 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Location</th>
-                <th scope="col">Time</th>
-                <th scope="col">Date</th>
+                <th scope="col">start date/time</th>
+                <th scope="col">End date/time</th>
+                <th class="col">Duration</th>
                 <th scope="col">Attending Student</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -17,12 +18,18 @@
                 <tr>
                     <th scope="row">{{ instructor_course.pk }}</th>
                     <td>{{ instructor_course.location }}</td>
-                    <td>{{ instructor_course.time }}</td>
-                    <td>{{ instructor_course.date }}</td>
+                    <td>{{ instructor_course.time_slot.start_time | date:"D j M Y H:i" }}</td>
+                    <td>{{ instructor_course.time_slot.end_time | date:"D j M Y H:i" }}</td>
+                    <td>Hours: {{ instructor_course.time_slot.duration }}</td>
                     <td>
-                        <a href="{% url 'student-details' instructor_course.get_student_details.pk %}">{{ instructor_course.get_student_details.email }}</a>
+                        {% if instructor_course.get_student_details and instructor_course.get_student_details.pk %}
+                            <a href="{% url 'student-details' instructor_course.get_student_details.pk %}">{{ instructor_course.get_student_details.email }}</a>
+                        {% else %}
+                            There is no attending student for this course.
+                        {% endif %}
                     </td>
-                    <td><a class="btn btn-primary" href="{% url 'course-edit-delete' instructor_course.pk %}">Edit/delete</a></td>
+                    <td><a class="btn btn-primary" href="{% url 'course-edit-delete' instructor_course.pk %}">Edit/delete</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

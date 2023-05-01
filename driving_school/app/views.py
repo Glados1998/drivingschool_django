@@ -136,7 +136,8 @@ def instructor_creation(request):
             return render(request, 'app/user-dashboard.html')
     else:
         instructor_add_form = InstructorForm()
-    return render(request, 'settings/secretary/secretary-instructor-add.html', {'instructor_add_form': instructor_add_form})
+    return render(request, 'settings/secretary/secretary-instructor-add.html',
+                  {'instructor_add_form': instructor_add_form})
 
 
 def instructor_edit_delete(request, instructor_pk):
@@ -184,13 +185,13 @@ def secretary_edit_delete(request, secretary_pk):
 
 def admin_creation(request):
     if request.method == 'POST':
-        admin_add_form = UserCreationForm(request.POST)
+        admin_add_form = UserForm(request.POST)
         if admin_add_form.is_valid():
             admin_add_form.save()
-            return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
+            return render(request, 'app/user-dashboard.html')
     else:
         admin_add_form = UserCreationForm()
-    return render(request, 'app/user-dashboard.html', {'admin_add_form': admin_add_form})
+    return render(request, 'settings/admin/admin-user-add.html', {'admin_add_form': admin_add_form})
 
 
 def admin_edit_delete(request, admin_pk):
@@ -211,10 +212,48 @@ def admin_edit_delete(request, admin_pk):
 def student_details(request, student_pk):
     instance = User.objects.get(pk=student_pk)
     student_courses = Course.objects.filter(assigned_student=instance)
-    return render(request, 'settings/shared/student-details.html', {'student': instance, 'student_courses': student_courses})
+    return render(request, 'settings/shared/student-details.html',
+                  {'student': instance, 'student_courses': student_courses})
 
 
 def instructor_details(request, instructor_pk):
     instructor = User.objects.get(pk=instructor_pk)
-    instructor_courses = Course.objects.filter(assigned_instructor=instructor)
-    return render(request, 'settings/shared/instructor-details.html', {'instructor': instructor, 'instructor_courses': instructor_courses})
+    instructor_courses = Course.objects.filter(assigned_instructor=instructor).exclude(assigned_student=None)
+    return render(request, 'settings/shared/instructor-details.html',
+                  {'instructor': instructor, 'instructor_courses': instructor_courses})
+
+
+def cancelCourse(request, course_pk):
+    student = User.objects.get(pk=request.user.pk)
+    course = Course.objects.get(pk=course_pk)
+    result = course.cancel_course_for_student(student)
+    if result:
+        messages.success(request, 'Course canceled successfully.')
+    else:
+        messages.error(request, 'Failed to cancel the course.')
+    return render(request, 'app/user-dashboard.html')
+
+
+def complete_course(request, course_pk):
+    course = Course.objects.get(pk=course_pk)
+    student = User.objects.get(pk=request.user.pk)
+    if student.role != User.STUDENT:
+        messages.error(request, 'Only students can complete courses.')
+        return render(request, 'app/user-dashboard.html')
+
+    if course.assigned_student != student:
+        messages.error(request, 'Student is not assigned to the course.')
+        return render(request, 'app/user-dashboard.html')
+    course_duration = course.time_slot.duration
+
+    if student.paid_course_hours < course_duration:
+        messages.error(request, 'Student does not have enough paid course hours.')
+        return render(request, 'app/user-dashboard.html')
+
+    student.paid_course_hours -= course_duration
+    student.taken_course_hours += course_duration
+
+    course.delete()
+    student.save()
+    messages.success(request, 'Course completed successfully.')
+    return render(request, 'app/user-dashboard.html')

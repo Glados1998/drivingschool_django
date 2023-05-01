@@ -14,8 +14,10 @@ urlpatterns = [
     path('instructor-edit-delete/<int:instructor_pk>/', views.instructor_edit_delete, name='instructor-edit-delete'),
     path('secretary-creation/', views.secretary_creation, name='secretary-creation'),
     path('secretary-edit-delete/<int:secretary_pk>/', views.secretary_edit_delete, name='secretary-edit-delete'),
-    path('admin-creation/', views.admin_creation, name='admin-creation'),
+    path('admin-creation/', views.admin_creation, name='admin-add-user'),
     path('admin-edit-delete/<int:admin_pk>/', views.admin_edit_delete, name='admin-edit-delete'),
     path('student-details/<int:student_pk>/', views.student_details, name='student-details'),
     path('instructor-details/<int:instructor_pk>/', views.instructor_details, name='instructor-details'),
+    path('cancel-course/<int:course_pk>/', views.cancelCourse, name='cancel-course'),
+    path('complete-course/<int:course_pk>/', views.complete_course, name='complete-course'),
 ]

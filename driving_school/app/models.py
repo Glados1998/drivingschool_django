@@ -68,9 +68,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Course(models.Model):
     location = models.CharField(max_length=254)
-    assigned_instructor = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_instructor',null=True, blank=True, limit_choices_to=Q(role=2))
-    assigned_student = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_student', null=True, blank=True, limit_choices_to=Q(role=1))
-    time_slot = models.ForeignKey('TimeSlot', on_delete=models.SET_NULL, related_name='courses_timeslot', null=True, blank=True)
+    assigned_instructor = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_instructor',
+                                            null=True, blank=True, limit_choices_to=Q(role=2))
+    assigned_student = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='courses_student', null=True,
+                                         blank=True, limit_choices_to=Q(role=1))
+    time_slot = models.ForeignKey('TimeSlot', on_delete=models.SET_NULL, related_name='courses_timeslot', null=True,
+                                  blank=True)
 
     def __str__(self):
         return f'{self.location}'
@@ -81,11 +84,44 @@ class Course(models.Model):
     def get_instructor_details(self):
         return self.assigned_instructor
 
+    def cancel_course_for_student(self, user):
+        # Check if the user is a student and is assigned to this course
+        if user.role == 1 and self.assigned_student == user:
+            # Set the assigned_student field to None
+            self.assigned_student = None
+
+            # Make the time slot available again
+            if self.time_slot:
+                self.time_slot.is_available = True
+                self.time_slot.save()
+
+            self.time_slot = None
+            self.save()  # Save the changes to the course
+            return True  # Indicate that the course was successfully canceled
+        return False  # Indicate that the course could not be canceled
+
+    def free_timeslot(self):
+        if self.time_slot:
+            self.time_slot.is_available = True
+            self.time_slot.save()
+            return True
+        return False
+
 
 class TimeSlot(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    duration = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.start_time} - {self.end_time}'
+        return f'{self.start_time} - {self.end_time}' + f' ({self.duration} hours)'
+
+    def calculate_duration(self):
+        duration_seconds = (self.end_time - self.start_time).total_seconds()
+        duration_hours = duration_seconds / 3600
+        return round(duration_hours, 2)
+
+    def save(self, *args, **kwargs):
+        self.duration = self.calculate_duration()
+        super().save(*args, **kwargs)
