@@ -1,65 +1,76 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-    <div>
-        <h3>Student details</h3>
-        <div class="accordion mt-3">
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Student details
-                    </button>
-                </h3>
-                <div id="collapseOne" class="collapse show accordion-collapse">
-                    <div class="accordion-body">
-                        <h4>Student email: <strong> {{ student.email }}</strong></h4>
-                        <h4>Student name: {% if student.name %}  <strong> {{ student.name }}</strong>
-                        {% else %} <strong> No name </strong> {% endif %} </h4>
-                        <h6>Paid course hours: <strong>{{ student.paid_course_hours }}</strong> (H)</h6>
-                        <h6>Taken course hours: <strong>{{ student.taken_course_hours }}</strong> (H)</h6>
-
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        Student schedule
-                    </button>
-                </h3>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                     data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th class="col">Course start</th>
-                                <th class="col">Course end</th>
-                                <th class="col">Course Duration</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for student_cours in student_courses %}
-                                <tr>
-                                    <td>{{ student_cours.time_slot.start_time | date:"D j M Y H:i" }}</td>
-                                    <td>{{ student_cours.time_slot.end_time | date:"D j M Y H:i" }}</td>
-                                    <td></td>
-                                </tr>
-                            {% empty %}
-                                <div class="alert alert-warning">
-                                    There are no courses assigned to this student, in case of an error please contact
-                                    an instructor or secretary.
-                                </div>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row text-center mt-3">
+            <div class="col">
+                <h1>Student details</h1>
+                <p class="lean text-muted">Here on <strong>Student details</strong> you can view all the information related to the selected student
+                    <br>name, email, paid & taken hours and his schedule if there is one.</p>
             </div>
         </div>
-        <a href="{% url 'user-dashboard' %}" class="btn btn-primary mt-3">Go back</a>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="accordion ">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Student details
+                            </button>
+                        </h3>
+                        <div id="collapseOne" class="collapse show accordion-collapse">
+                            <div class="accordion-body">
+                                <h4>Student email: <strong> {{ student.email }}</strong></h4>
+                                <h4>Student name: {% if student.name %}  <strong> {{ student.name }}</strong>
+                                {% else %} <strong> No name </strong> {% endif %} </h4>
+                                <h6>Paid course hours: <strong>{{ student.paid_course_hours }}</strong> (H)</h6>
+                                <h6>Taken course hours: <strong>{{ student.taken_course_hours }}</strong> (H)</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Student schedule
+                            </button>
+                        </h3>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="col">Course start</th>
+                                        <th class="col">Course end</th>
+                                        <th class="col">Course Duration</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for student_cours in student_courses %}
+                                        <tr>
+                                            <td>{{ student_cours.time_slot.start_time | date:"D j M Y H:i" }}</td>
+                                            <td>{{ student_cours.time_slot.end_time | date:"D j M Y H:i" }}</td>
+                                            <td>{{ student_cours.time_slot.duration}}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <div class="alert alert-warning">
+                                            There are no courses assigned to this student, in case of an error please
+                                            contact
+                                            an instructor or secretary.
+                                        </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'user-dashboard' %}" class="btn btn-primary mt-3">Go back</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

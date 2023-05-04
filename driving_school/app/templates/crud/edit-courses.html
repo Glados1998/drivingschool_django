@@ -1,12 +1,27 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-
-<form method="post">
-    {% csrf_token %}
-    {{ course_edit_form.as_p }}
-        <button type="submit" name="edit">Edit</button>
-        <button type="submit" name="delete">Delete</button>
-</form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center mt-3">
+                <div class="card" style="width: fit-content;">
+                    <div class="card-header">
+                        <h2>Course Editor</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ course_edit_form.as_p }}
+                            <div>
+                                <button class="btn btn-primary" type="submit" name="edit">Save change</button>
+                                <button class="btn btn-danger" type="submit" name="delete">Delete</button>
+                                <a href="{% url 'user-dashboard' %}" class="btn btn-warning">Go back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
