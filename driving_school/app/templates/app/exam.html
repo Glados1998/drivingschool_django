@@ -1,0 +1,28 @@
+{% extends 'app/base.html' %}
+
+{% block document_title %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ exam.title }}</h2>
+                <form method="post" action="{% url 'submit_exam' exam.id %}">
+                    {% csrf_token %}
+                    {% for question in exam_questions %}
+                        <h4>{{ question.exam_question }}:</h4>
+                        {% for answer in question.answer_set.all %}
+                            <label>
+                                <input type="radio" name="question_{{ question.pk }}" value="{{ answer.pk }}" required>
+                                {{ answer.answer }}
+                            </label><br>
+                        {% endfor %}
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a class="btn btn-warning" href="{% url 'user-dashboard' %}">Abort Exam</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

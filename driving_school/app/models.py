@@ -44,7 +44,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         (SECRETARY, 'Secretary'),
     ]
 
+    PASSED = 1
+    FAILED = 2
+    NOT_CONCERNED = 3
+
+    ExamStatus = [
+        (PASSED, 'passed'),
+        (FAILED, 'failed'),
+        (NOT_CONCERNED, 'not concerned'),
+    ]
+
     role = models.PositiveSmallIntegerField(choices=USER_ROLE_CHOICES, blank=True, null=True)
+    exam_status = models.PositiveSmallIntegerField(choices=ExamStatus, blank=True, null=True)
     paid_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     taken_course_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     student_timeslots = models.ManyToManyField('TimeSlot', blank=True, related_name='students')
@@ -125,3 +136,23 @@ class TimeSlot(models.Model):
     def save(self, *args, **kwargs):
         self.duration = self.calculate_duration()
         super().save(*args, **kwargs)
+
+
+class Exam(models.Model):
+    title = models.CharField(max_length=254)
+
+
+class ExamQuestion(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    exam_question = models.CharField(max_length=254)
+
+
+class Answer(models.Model):
+    exam_question = models.ForeignKey(ExamQuestion, on_delete=models.CASCADE)
+    answer = models.CharField(max_length=254)
+    is_correct = models.BooleanField(default=False)
+
+
+class StudentAnswer(models.Model):
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)

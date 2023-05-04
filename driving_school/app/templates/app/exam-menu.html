@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{% block document_title %}Exam{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Hello again {{ user.name }} <br>
+                    Before starting you're exam, you must select one</h1>
+                <h3>Good luck to you!</h3>
+            </div>
+            <div class="col-md-12">
+                {% for exam in exams %}
+                    <a href="{% url 'start_exam' exam.pk %}" class="btn btn-primary btn-lg btn-block">start
+                        exam: {{ exam.pk }}</a>
+                {% empty %}
+                <p>sorry for the inconvenience, but there are no exams available.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-primary">Go back</a>
+    </div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, User, TimeSlot
+from .models import Course, User, TimeSlot, Exam, ExamQuestion, Answer, StudentAnswer
 
 
 class CourseForm(forms.ModelForm):
@@ -146,3 +146,21 @@ class AdminForm(forms.ModelForm):
             'is_active': 'Please select if the user is active',
             'assigned_courses': 'Please select at least one course',
         }
+
+
+class ExamForm(forms.ModelForm):
+    class Meta:
+        model = Exam
+        fields = ['title']
+
+
+class ExamQuestionForm(forms.ModelForm):
+    class Meta:
+        model = ExamQuestion
+        fields = ['exam_question']
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['answer', 'is_correct']

@@ -47,6 +47,9 @@
                 </table>
             </div>
         </div>
+    {% if logged_in_user.taken_course_hours >= 8 %}
+        {% include 'includes/exam_component.html' %}
+    {% endif %} 
     </div>
 </div>
 

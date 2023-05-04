@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Hello {{ logged_in_user.name }}, how are you holding up?</h1>
+            <p>seems like you reached the needed <strong>8 hours</strong> of taken course hours here in our driving
+                school. <br>
+                The administration hase determined that you are eligible to take final exam for you're driving licence.
+            </p>
+        </div>
+        <div class="col-md-12">
+            <h3>Take you're final exam {{ logged_in_user.name }}!</h3>
+            <p>Good luck!</p>
+            <a href="{% url 'exam_menu' %}" class="btn btn-primary">Take exam</a>
+        </div>
+    </div>
+</div>

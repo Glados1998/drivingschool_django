@@ -1,10 +1,10 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserForm, CourseForm, StudentForm, InstructorForm, InstructorForm, \
-    SecretaryForm
-from .models import Course, User
+    SecretaryForm, AdminForm, ExamForm, ExamQuestionForm, AnswerForm
+from .models import Course, User, Exam, ExamQuestion, Answer, StudentAnswer
 
 
 # Create your views here.
@@ -257,3 +257,102 @@ def complete_course(request, course_pk):
     student.save()
     messages.success(request, 'Course completed successfully.')
     return render(request, 'app/user-dashboard.html')
+
+
+def createExam(request):
+    if request.method == 'POST':
+        exam_add_form = ExamForm(request.POST)
+        if exam_add_form.is_valid():
+            new_exam = exam_add_form.save(commit=False)
+            new_exam.save()
+            return render(request, 'app/user-dashboard.html')
+    else:
+        exam_add_form = ExamForm()
+    return render(request, 'app/user-dashboard.html', {'exam_add_form': exam_add_form})
+
+
+def editDeleteExam(request, exam_pk):
+    instance = Exam.objects.get(pk=exam_pk)
+    if 'edit' in request.POST:
+        exam_edit_form = ExamForm(request.POST, instance=instance)
+        if exam_edit_form.is_valid():
+            exam_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        exam_edit_form = ExamForm(instance=instance)
+    return render(request, 'crud/edit-exam.html', {'exam_edit_form': exam_edit_form})
+
+
+def createExamQuestion(request):
+    if request.method == 'POST':
+        exam_question_add_form = ExamQuestionForm(request.POST)
+        if exam_question_add_form.is_valid():
+            new_exam_question = exam_question_add_form.save(commit=False)
+            new_exam_question.save()
+            return render(request, 'app/user-dashboard.html')
+    else:
+        exam_question_add_form = ExamQuestionForm()
+    return render(request, 'app/user-dashboard.html', {'exam_question_add_form': exam_question_add_form})
+
+
+def editDeleteQuestion(request, question_pk):
+    instance = ExamQuestion.objects.get(pk=question_pk)
+    if 'edit' in request.POST:
+        exam_question_edit_form = ExamQuestionForm(request.POST, instance=instance)
+        if exam_question_edit_form.is_valid():
+            exam_question_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        exam_question_edit_form = ExamQuestionForm(instance=instance)
+    return render(request, 'crud/edit-question.html', {'exam_question_edit_form': exam_question_edit_form})
+
+
+def exam_menu(request):
+    exams = Exam.objects.all()
+    return render(request, 'app/exam-menu.html', {'exams': exams})
+
+
+def start_exam(request, exam_pk):
+    exam = Exam.objects.get(pk=exam_pk)
+    exam_questions = exam.examquestion_set.all()
+    context = {'exam': exam, 'exam_questions': exam_questions}
+    return render(request, 'app/exam.html', context)
+
+
+def submit_exam(request, exam_pk):
+    user = request.user
+    if request.method != 'POST':
+        return redirect('app:exam_menu')
+
+    exam = get_object_or_404(Exam, pk=exam_pk)
+    exam_questions = exam.examquestion_set.all()
+
+    correct_answers = 0
+    incorrect_answers = 0
+
+    for question in exam_questions:
+        user_answer_id = request.POST.get(f'question_{question.pk}')
+        if not user_answer_id:
+            continue
+
+        user_answer = Answer.objects.get(pk=user_answer_id)
+        if user_answer.is_correct:
+            correct_answers += 1
+        else:
+            incorrect_answers += 1
+    if correct_answers >= incorrect_answers:
+        messages.success(request, 'Congratulations! You passed the exam.')
+        user.exam_status = User.PASSED
+        user.save()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        messages.error(request, 'Sorry! You failed the exam.')
+        user.exam_status = User.FAILED
+        user.save()
+        return render(request, 'app/user-dashboard.html')
