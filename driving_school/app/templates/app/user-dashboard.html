@@ -1,25 +1,20 @@
 {% extends 'app/base.html' %}
 {% block document_title %}
-    user-dashboard
+    dashboard
 {% endblock %}
 
 {% block content %}
     {% if logged_in_user.is_authenticated %}
-        <h2>Your dashboard</h2>
-        <div>
+        <div class="container mt-4">
+            <h2>Your dashboard</h2>
             <p>Welcome {{ logged_in_user.email }}</p>
             {% if logged_in_user.role == 1 %}
-                <div>
-                    {% include 'settings/student/account-details.html' %}
-                </div>
+                {% include 'settings/student/account-details.html' %}
             {% elif logged_in_user.role == 2 %}
-                hello instructor
                 {% include 'settings/instructor/course-list.html' %}
             {% elif logged_in_user.role == 3 %}
-                hello admin
                 {% include 'settings/admin/admin-users-panel.html' %}
             {% elif logged_in_user.role == 4 %}
-                hello secretary
                 {% include 'settings/secretary/instructor-list.html' %}
                 {% include 'settings/secretary/student-list.html' %}
                 {% include 'settings/secretary/course-list.html' %}
@@ -27,7 +22,7 @@
         </div>
     {% else %}
         <div>
-            <h2>user-dashboard</h2>
+            <h2>Dashboard</h2>
             <div class="alert alert-primary">
                 <p>Sorry you can't access the dashboard if you aren't logged in</p>
                 <a class="alert-link" href="{% url 'login' %}">login</a>
