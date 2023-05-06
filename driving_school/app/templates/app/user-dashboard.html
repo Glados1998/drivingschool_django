@@ -14,6 +14,7 @@
                 {% include 'settings/instructor/course-list.html' %}
             {% elif logged_in_user.role == 3 %}
                 {% include 'settings/admin/admin-users-panel.html' %}
+                {% include 'settings/admin/admin-exam-panel.html' %}
             {% elif logged_in_user.role == 4 %}
                 {% include 'settings/secretary/instructor-list.html' %}
                 {% include 'settings/secretary/student-list.html' %}

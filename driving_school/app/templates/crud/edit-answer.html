@@ -6,12 +6,12 @@
             <div class="col-md-12 d-flex justify-content-center mt-3">
                 <div class="card" style="width: fit-content;">
                     <div class="card-header">
-                        <h2>Exam Editor</h2>
+                        <h2>Answer editor</h2>
                     </div>
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
-                            {{ exam_edit_form.as_p }}
+                            {{ exam_answer_edit_form.as_p }}
                             <div>
                                 <button class="btn btn-primary" type="submit" name="edit">Save change</button>
                                 <button class="btn btn-danger" type="submit" name="delete">Delete</button>

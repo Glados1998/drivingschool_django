@@ -152,15 +152,18 @@ class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
         fields = ['title']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+        },
 
 
 class ExamQuestionForm(forms.ModelForm):
     class Meta:
         model = ExamQuestion
-        fields = ['exam_question']
+        fields = ['exam_question', 'exam']
 
 
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
-        fields = ['answer', 'is_correct']
+        fields = ['answer', 'is_correct', 'exam_question']

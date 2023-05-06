@@ -1,0 +1,120 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Exams</h3>
+            <div class="card mb-4 align-self-center" style="width: fit-content;">
+                <div class="card-header">
+                    <h4 class="card-title">Exam form</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'create_exam' %}" method="post">
+                        {% csrf_token %}
+                        {{ exam_add_form }}
+                        <button class="btn btn-primary" type="submit" name="edit">Create Exam</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Exams - list</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>title</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for exam in exams %}
+                    <tr>
+                        <td>{{ exam.pk }}</td>
+                        <td>{{ exam.title }}</td>
+                        <td><a href="{% url 'edit_exam' exam.pk %}" class="btn btn-primary">Edit/delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Exam question</h3>
+            <div class="card mb-4 align-self-center" style="width: fit-content;">
+                <div class="card-header">
+                    <h4 class="card-title">Exam question form</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'create_question' %}" method="post">
+                        {% csrf_token %}
+                        {{ exam_question_add_form }}
+                        <button class="btn btn-primary" type="submit" name="edit">Create question</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Exams questions - list</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Questions</th>
+                    <th>Related exam</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for exam_question in exam_questions %}
+                    <tr>
+                        <td>{{ exam_question.pk }}</td>
+                        <td>{{ exam_question.exam_question }}</td>
+                        <td>{{ exam_question.exam.title }} - <strong>ID: {{ exam_question.exam.pk }}</strong></td>
+                        <td><a href="{% url 'edit_question' exam_question.pk %}" class="btn btn-primary">Edit/delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Exam answers</h3>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="card-title">Exam answers</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'create_answer' %}" method="post">
+                        {% csrf_token %}
+                        {{ answer_add_form }}
+                        <button class="btn btn-primary" type="submit" name="edit">Create answer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Exams answers - list</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Answer</th>
+                    <th>Related question</th>
+                    <th>Is correct ?</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for answer in answers %}
+                    <tr>
+                        <td>{{ answer.pk }}</td>
+                        <td>{{ answer.answer }}</td>
+                        <td>{{ answer.exam_question.exam_question }} - <strong>ID: {{ answer.exam_question.pk }}</strong></td>
+                        <td>{{ answer.is_correct }}</td>
+                        <td><a href="{% url 'edit_answer' answer.pk %}" class="btn btn-primary">Edit/delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

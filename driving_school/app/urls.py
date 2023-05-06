@@ -23,4 +23,10 @@ urlpatterns = [
     path('exam', views.exam_menu, name='exam_menu'),
     path('exam/start/<int:exam_pk>/', views.start_exam, name='start_exam'),
     path('exam/submit/<int:exam_pk>/', views.submit_exam, name='submit_exam'),
+    path('exam/create', views.createExam, name='create_exam'),
+    path('exam/<int:exam_pk>/', views.editDeleteExam, name='edit_exam'),
+    path('question/create/', views.createExamQuestion, name='create_question'),
+    path('question/<int:question_pk>/', views.editDeleteQuestion, name='edit_question'),
+    path('answer/create/', views.createExamAnswer, name='create_answer'),
+    path('answer/<int:answer_pk>/', views.editDeleteAnswer, name='edit_answer'),
 ]

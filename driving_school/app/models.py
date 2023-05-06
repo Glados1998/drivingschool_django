@@ -141,16 +141,25 @@ class TimeSlot(models.Model):
 class Exam(models.Model):
     title = models.CharField(max_length=254)
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class ExamQuestion(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     exam_question = models.CharField(max_length=254)
+
+    def __str__(self):
+        return f'{self.exam_question}' + f' ({self.exam.title})'
 
 
 class Answer(models.Model):
     exam_question = models.ForeignKey(ExamQuestion, on_delete=models.CASCADE)
     answer = models.CharField(max_length=254)
     is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.answer}' + f' ({self.exam_question.exam.title})'
 
 
 class StudentAnswer(models.Model):
