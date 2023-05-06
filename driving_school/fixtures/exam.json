@@ -1,0 +1,521 @@
+[
+  {
+    "model": "app.exam",
+    "pk": 1,
+    "fields": {
+      "title": "Exam 1"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 1,
+    "fields": {
+      "exam": 1,
+      "exam_question": "What is the speed limit in a school zone?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 2,
+    "fields": {
+      "exam": 1,
+      "exam_question": "Do you have to stop at a stop sign?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 3,
+    "fields": {
+      "exam": 1,
+      "exam_question": "What does a engin light mean?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 4,
+    "fields": {
+      "exam": 1,
+      "exam_question": "What does a red light mean?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 5,
+    "fields": {
+      "exam": 1,
+      "exam_question": "Is it ok to drive on the wrong side of the road?"
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 1,
+    "fields": {
+      "exam_question": 1,
+      "answer": "30 km/h",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 2,
+    "fields": {
+      "exam_question": 1,
+      "answer": "50 km/h",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 3,
+    "fields": {
+      "exam_question": 1,
+      "answer": "60 km/h",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 4,
+    "fields": {
+      "exam_question": 2,
+      "answer": "Yes",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 5,
+    "fields": {
+      "exam_question": 2,
+      "answer": "No",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 6,
+    "fields": {
+      "exam_question": 3,
+      "answer": "a problem with the engine",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 7,
+    "fields": {
+      "exam_question": 3,
+      "answer": "a problem with the brakes",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 8,
+    "fields": {
+      "exam_question": 3,
+      "answer": "a problem with the tires",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 9,
+    "fields": {
+      "exam_question": 4,
+      "answer": "Stop",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 10,
+    "fields": {
+      "exam_question": 4,
+      "answer": "Go",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 11,
+    "fields": {
+      "exam_question": 5,
+      "answer": "Yes",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 12,
+    "fields": {
+      "exam_question": 5,
+      "answer": "No",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.exam",
+    "pk": 2,
+    "fields": {
+      "title": "Exam 2"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 6,
+    "fields": {
+      "exam": 2,
+      "exam_question": "What should you do when an emergency vehicle approaches with lights and sirens?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 7,
+    "fields": {
+      "exam": 2,
+      "exam_question": "What is the minimum following distance under normal driving conditions?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 8,
+    "fields": {
+      "exam": 2,
+      "exam_question": "When are you allowed to pass on the right?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 9,
+    "fields": {
+      "exam": 2,
+      "exam_question": "What is the legal blood alcohol concentration (BAC) limit for drivers?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 10,
+    "fields": {
+      "exam": 2,
+      "exam_question": "When should you use your high-beam headlights?"
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 13,
+    "fields": {
+      "exam_question": 6,
+      "answer": "Pull over to the right and stop",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 14,
+    "fields": {
+      "exam_question": 6,
+      "answer": "Speed up to get out of the way",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 15,
+    "fields": {
+      "exam_question": 6,
+      "answer": "Continue driving normally",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 16,
+    "fields": {
+      "exam_question": 7,
+      "answer": "2 seconds",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 17,
+    "fields": {
+      "exam_question": 7,
+      "answer": "1 second",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 18,
+    "fields": {
+      "exam_question": 7,
+      "answer": "3 seconds",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 19,
+    "fields": {
+      "exam_question": 8,
+      "answer": "When the vehicle in front of you is turning left",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 20,
+    "fields": {
+      "exam_question": 8,
+      "answer": "When the vehicle in front of you is turning right",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 21,
+    "fields": {
+      "exam_question": 8,
+      "answer": "Whenever you want",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 22,
+    "fields": {
+      "exam_question": 9,
+      "answer": "0.08%",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 23,
+    "fields": {
+      "exam_question": 9,
+      "answer": "0.10%",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 24,
+    "fields": {
+      "exam_question": 9,
+      "answer": "0.05%",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 25,
+    "fields": {
+      "exam_question": 10,
+      "answer": "When driving in rural areas with no other vehicles nearby",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 26,
+    "fields": {
+      "exam_question": 10,
+      "answer": "In city traffic",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 27,
+    "fields": {
+      "exam_question": 10,
+      "answer": "When following another vehicle closely",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.exam",
+    "pk": 3,
+    "fields": {
+      "title": "Exam 3"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 11,
+    "fields": {
+      "exam": 3,
+      "exam_question": "What does a flashing yellow traffic light indicate?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 12,
+    "fields": {
+      "exam": 3,
+      "exam_question": "When parallel parking, how far away should your vehicle be from the curb?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 13,
+    "fields": {
+      "exam": 3,
+      "exam_question": "What is the meaning of a solid white line on the road?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 14,
+    "fields": {
+      "exam": 3,
+      "exam_question": "When should you use your turn signals?"
+    }
+  },
+  {
+    "model": "app.ExamQuestion",
+    "pk": 15,
+    "fields": {
+      "exam": 3,
+      "exam_question": "What is the purpose of a roundabout?"
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 28,
+    "fields": {
+      "exam_question": 11,
+      "answer": "Proceed with caution",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 29,
+    "fields": {
+      "exam_question": 11,
+      "answer": "Come to a complete stop",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 30,
+    "fields": {
+      "exam_question": 11,
+      "answer": "Increase your speed",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 31,
+    "fields": {
+      "exam_question": 12,
+      "answer": "30 cm (12 inches)",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 32,
+    "fields": {
+      "exam_question": 12,
+      "answer": "1 meter (3 feet)",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 33,
+    "fields": {
+      "exam_question": 12,
+      "answer": "2 meters (6 feet)",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 34,
+    "fields": {
+      "exam_question": 13,
+      "answer": "Do not change lanes",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 35,
+    "fields": {
+      "exam_question": 13,
+      "answer": "Change lanes only if it's safe",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 36,
+    "fields": {
+      "exam_question": 13,
+      "answer": "You can change lanes at any time",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 37,
+    "fields": {
+      "exam_question": 14,
+      "answer": "Before turning or changing lanes",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 38,
+    "fields": {
+      "exam_question": 14,
+      "answer": "Only when other vehicles are nearby",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 39,
+    "fields": {
+      "exam_question": 14,
+      "answer": "Never",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 40,
+    "fields": {
+      "exam_question": 15,
+      "answer": "To facilitate efficient traffic flow and reduce congestion",
+      "is_correct": true
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 41,
+    "fields": {
+      "exam_question": 15,
+      "answer": "To give priority to certain vehicles",
+      "is_correct": false
+    }
+  },
+  {
+    "model": "app.Answer",
+    "pk": 42,
+    "fields": {
+      "exam_question": 15,
+      "answer": "To create a meeting point for pedestrians",
+      "is_correct": false
+    }
+  }
+]
