@@ -1,26 +1,25 @@
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'css/tab.css' %}">
-
-<div class="students mt-5 mb-5 row">
-    <h2><b>You're assigned students</b> - <i class="list">list</i></h2>
+<div class="mt-5 mb-5 row">
+    <h2><b>You're assigned students</b> - list</h2>
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th class="col tab"><i>Name</i></th>
-                <th class="col tab"><i>Email</i></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Paid course hours</th>
+                <th>Taken course hours</th>
             </tr>
             </thead>
             <tbody>
-            {% for student in students %}
-            {% if student.assigned_instructor_id == logged_in_user.pk %}
-            <tr>
-                <td>{{ student.name }}</td>
-                <td><a href="{% url 'student-details' student.pk %}">{{ student.email }}</a></td>
-            </tr>
-            {% endif %}
+            {% for student in assigned_students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.paid_course_hours }}</td>
+                    <td>{{ student.taken_course_hours }}</td>
+                </tr>
             {% endfor %}
         </table>
+        <p>Total numbers of students: {{ assigned_students.count }}</p>
     </div>
 </div>

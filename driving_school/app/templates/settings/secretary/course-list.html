@@ -1,28 +1,26 @@
 {% load static %}
-
-<link rel="stylesheet" href="{% static 'css/tab.css' %}">
-
-<div class="courses mt-5 mb-5 row">
+<div class="courses mt-5 row">
     <div class="mb-2">
-        <h2><b>Courses</b> - <i class="list">list</i></h2>
+        <h2><b>Courses & general schedule</b> - list</h2>
         <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
     </div>
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th class="col tab"><i>Location</i></th>
-                <th class="col tab"><i>Course schedule</i></th>
-                <th class="col tab"><i>Attending Student</i>th>
-                <th class="col tab"><i>Attending Instructor</i></th>
-                <th class="col tab"><i>Actions</i></th>
+                <th>Location</th>
+                <th>Schedule</th>
+                <th>Student</th>
+                <th>Instructor</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for course in courses %}
                 <tr>
                     <td>{{ course.location }}</td>
-                    <td>{{ course.time_slot.start_time | date:"D j M Y H:i" }} - {{ course.time_slot.end_time | date:"D j M Y H:i" }}</td>
+                    <td>{{ course.time_slot.start_time | date:"D j M Y H:i" }}
+                        - {{ course.time_slot.end_time | date:"D j M Y H:i" }}</td>
                     <td>{{ course.get_student_details.email }}</td>
                     <td>{{ course.get_instructor_details.email }}</td>
                     <td><a class="btn btn-primary" href="{% url 'course-edit-delete' course.pk %}">Edit/delete</a></td>
@@ -30,5 +28,6 @@
             {% endfor %}
             </tbody>
         </table>
+        <p>Total numbers of courses: {{ courses.count }}</p>
     </div>
 </div>

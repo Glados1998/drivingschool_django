@@ -1,0 +1,370 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+  font-size: 57px;
+  width: fit-content;
+  float: left;
+}
+
+h2 {
+  font-family: "Righteous", cursive;
+  width: fit-content;
+  float: right;
+}
+
+h3 {
+  font-family: "Righteous", cursive;
+}
+
+.hello {
+  margin-top: 6%;
+  width: fit-content;
+}
+
+.dicton {
+  font-family: "PT Serif", serif;
+  margin-left: 5%;
+}
+
+.courses {
+  margin-top: -10%;
+  width: fit-content;
+  float: right;
+}
+
+.assigned {
+  width: 80%;
+  float: left;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+p {
+  font-family: "Righteous", cursive;
+}
+
+.ins {
+  margin-left: 26%;
+}
+
+.addInstructor {
+  margin-left: 10%;
+  margin-top: 8%;
+  width: 25%;
+}
+
+.btnAdd {
+  float: right;
+}
+
+#id_location {
+  width: 100%;
+}
+
+#id_assigned_instructor {
+  width: 80%;
+}
+
+#id_assigned_student {
+  width: 80%;
+}
+
+#id_time_slot {
+  width: 80%;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+p {
+  font-family: "Righteous", cursive;
+}
+
+.ins {
+  margin-left: 26%;
+}
+
+.addInstructor {
+  margin-left: 10%;
+  margin-top: 8%;
+  width: 25%;
+}
+
+.btnAdd {
+  float: right;
+}
+
+#id_email {
+  width: 100%;
+}
+
+#id_password {
+  width: 100%;
+}
+
+#id_name {
+  width: 100%;
+}
+
+#id_paid_course_hours {
+  width: 20%;
+  margin-left: 38%;
+}
+
+#id_student_timeslots {
+  margin-left: -30%;
+}
+
+#id_taken_course_hours {
+  width: 20%;
+  margin-left: 35%;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+p {
+  font-family: "Righteous", cursive;
+}
+
+.ins {
+  margin-left: 26%;
+}
+
+.addInstructor {
+  margin-left: 10%;
+  margin-top: 8%;
+  width: 25%;
+}
+
+.btnAdd {
+  float: right;
+}
+
+#id_email {
+  width: 100%;
+}
+
+#id_password {
+  width: 100%;
+}
+
+#id_name {
+  width: 100%;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+.img-carrousel-2 {
+  max-height: 650px;
+}
+
+.img-carrousel-3 {
+  max-height: 650px;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+p {
+  font-family: "Righteous", cursive;
+}
+
+#id_username {
+  margin-left: 12%;
+  margin-top: 1%;
+}
+
+#id_password {
+  margin-left: 12%;
+  margin-top: 1%;
+}
+
+.btnLog {
+  display: flex;
+  margin: auto;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+  font-size: 57px;
+}
+
+h2 {
+  font-family: "Righteous", cursive;
+}
+
+.hello {
+  margin-top: 6%;
+  width: fit-content;
+}
+
+.dicton {
+  margin-left: 5%;
+}
+
+.list {
+  font-size: 27px;
+}
+
+.instructors {
+  width: 62%;
+  float: right;
+}
+
+.courses {
+  width: 79%;
+  float: left;
+}
+
+.students {
+  width: 62%;
+  float: right;
+}
+
+.tab {
+  font-family: "Righteous", cursive;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+h3 {
+  font-family: "Righteous", cursive;
+}
+
+.nav {
+  background-color: #50ABC8;
+}
+
+.user {
+  margin-right: 30px;
+}
+
+.log {
+  width: fit-content;
+  float: right;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+  font-size: 57px;
+}
+
+h2 {
+  font-family: "Righteous", cursive;
+}
+
+.hello {
+  margin-top: 6%;
+  width: fit-content;
+}
+
+.dicton {
+  font-family: "PT Serif", serif;
+  margin-left: 5%;
+}
+
+.list {
+  font-size: 27px;
+}
+
+.courses {
+  width: 72%;
+  float: right;
+}
+
+.students {
+  width: 40%;
+  float: left;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9205883037) 0%, rgba(80, 171, 200, 0.8617647743) 100%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+h3 {
+  font-family: "Righteous", cursive;
+}
+
+/*# sourceMappingURL=style.css.map */

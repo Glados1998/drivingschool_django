@@ -1,18 +1,27 @@
 {% extends 'app/base.html' %}
-{% load static %}
+
+{% block document_title %}
+    Add Course
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/form-add-course.css' %}">
-
-<div class="ins mt-5">
-    <h1>Course Creation</h1>
-    <div class="addInstructor">
-        <form action="{% url 'course-creation' %}" method="post">
-            {% csrf_token %}
-            {{ course_add_form.as_p }}
-            <input class="btn btn-success" type="submit" value="Add Course">
-        </form>
-        <a href="{% url 'user-dashboard' %}" class="btn btn-primary btnAdd">Go back</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center mt-3 ">
+                <div class="card" style="width: fit-content;">
+                    <div class="card-header">
+                        <h2>Course Creation</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'course-creation' %}" method="post">
+                            {% csrf_token %}
+                            {{ course_add_form.as_p }}
+                            <input class="btn btn-primary" type="submit" value="Add Course">
+                            <a href="{% url 'user-dashboard' %}" class="btn btn-warning">Go back</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

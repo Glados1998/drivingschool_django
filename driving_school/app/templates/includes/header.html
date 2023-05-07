@@ -1,29 +1,25 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 <header>
-    <nav class="navbar navbar-expand-lg nav">
+    <nav class="navbar bg-primary-subtle text-white navbar-expand-lg nav">
         <div class="container-fluid">
             <a href="{% url 'index' %}" class="navbar-brand"><b>LesBoss™</b> - Driving School</a>
             <div class="log" id="navbarNav">
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link user" href="{% url 'user-dashboard' %}"><b>Dashboard</b><img src="{% static 'assets/user.svg' %}" alt="icon user"></a>
+                            <a class="nav-link user" href="{% url 'user-dashboard' %}">Dashboard</a>
                         </li>
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}"><b>Logout</b><img src="{% static 'assets/logout.svg' %}" alt="icon logout"></a>
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}"><b>Login</b><img src="{% static 'assets/login.svg' %}" alt="icon login"></a>
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
-
         </div>
-
     </nav>
 </header>

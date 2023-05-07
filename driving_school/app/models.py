@@ -127,7 +127,9 @@ class TimeSlot(models.Model):
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.start_time} - {self.end_time}' + f' ({self.duration} hours)'
+        formatted_start_time = self.start_time.strftime('%Y-%m-%d %H:%M')
+        formatted_end_time = self.end_time.strftime('%Y-%m-%d %H:%M')
+        return f'{formatted_start_time} - {formatted_end_time} | {self.duration} hours'
 
     def calculate_duration(self):
         duration_seconds = (self.end_time - self.start_time).total_seconds()

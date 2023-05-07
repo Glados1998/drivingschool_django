@@ -32,6 +32,7 @@ def user_panel(request):
     courses = Course.objects.all()
     all_users = User.objects.all()
     exams = Exam.objects.all()
+    assigned_students = User.objects.filter(assigned_instructor=request.user)
     exam_questions = ExamQuestion.objects.all()
     answers = Answer.objects.all()
     all_personal = User.objects.filter(role=2 | 3 | 4)
@@ -51,7 +52,7 @@ def user_panel(request):
                    'instructors': instructors, 'admins': admins, 'secretaries': secretaries, 'all_users': all_users,
                    'all_personal': all_personal, 'instructor_courses': instructor_courses,
                    'student_courses': student_courses, 'exams': exams, 'exam_questions': exam_questions,
-                   'answers': answers})
+                   'answers': answers, 'assigned_students': assigned_students})
 
 
 def logout_def(request):
@@ -167,11 +168,12 @@ def secretary_creation(request):
         if secretary_add_form.is_valid():
             new_secretary = secretary_add_form.save(commit=False)
             new_secretary.role = 4
+            new_secretary.is_staff = True
             new_secretary.save()
             return render(request, 'app/user-dashboard.html')
     else:
         secretary_add_form = SecretaryForm()
-    return render(request, 'app/user-dashboard.html', {'secretary_add_form': secretary_add_form})
+    return render(request, 'settings/admin/admin-secretary-add.html', {'secretary_add_form': secretary_add_form})
 
 
 def secretary_edit_delete(request, secretary_pk):

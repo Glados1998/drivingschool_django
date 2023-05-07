@@ -8,6 +8,12 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['location', 'assigned_instructor', 'assigned_student', 'time_slot']
+        widgets = {
+            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'assigned_instructor': forms.Select(attrs={'class': 'form-control'}),
+            'assigned_student': forms.Select(attrs={'class': 'form-control'}),
+            'time_slot': forms.Select(attrs={'class': 'form-control'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,19 +38,24 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = User
         fields = {'password', 'email', 'name', 'is_active', 'student_timeslots', 'paid_course_hours',
-                  'taken_course_hours'}
+                  'taken_course_hours', 'assigned_instructor'}
         exclude = {'role'}
         widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'is_active': forms.CheckboxInput(),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'student_timeslots': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'paid_course_hours': forms.NumberInput(attrs={'class': 'form-control'}),
+            'taken_course_hours': forms.NumberInput(attrs={'class': 'form-control'}),
+            'assigned_instructor': forms.Select(attrs={'class': 'form-control'}),
         },
         labels = {
             'password': 'Password',
             'email': 'Email',
             'name': 'Name',
             'is_active': 'Active',
+            'student_timeslots': 'Time Slots',
         }
         help_texts = {
             'password': 'Password must be at least 8 characters long',
@@ -78,10 +89,10 @@ class InstructorForm(forms.ModelForm):
         model = User
         fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
-            'name': forms.TextInput(),
-            'email': forms.EmailInput(),
-            'password': forms.PasswordInput(),
-            'is_active': forms.CheckboxInput(),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
             'password': 'Password',
@@ -100,10 +111,10 @@ class SecretaryForm(forms.ModelForm):
         model = User
         fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'is_active': forms.CheckboxInput(),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
             'password': 'Password',
@@ -125,10 +136,10 @@ class AdminForm(forms.ModelForm):
         model = User
         fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
-            'name': forms.TextInput(),
-            'is_active': forms.CheckboxInput(),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
             'password': 'Password',
@@ -152,15 +163,36 @@ class ExamForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
         },
+        labels = {
+            'title': 'Title',
+        }
 
 
 class ExamQuestionForm(forms.ModelForm):
     class Meta:
         model = ExamQuestion
         fields = ['exam_question', 'exam']
+        widgets = {
+            'exam_question': forms.TextInput(attrs={'class': 'form-control'}),
+            'exam': forms.Select(attrs={'class': 'form-control'}),
+        },
+        labels = {
+            'exam_question': 'Question',
+            'exam': 'Exam',
+        }
 
 
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ['answer', 'is_correct', 'exam_question']
+        widgets = {
+            'answer': forms.TextInput(attrs={'class': 'form-control'}),
+            'is_correct': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'exam_question': forms.Select(attrs={'class': 'form-control'}),
+        },
+        labels = {
+            'answer': 'Answer',
+            'is_correct': 'Correct',
+            'exam_question': 'Question',
+        }

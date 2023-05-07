@@ -1,21 +1,17 @@
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'css/tab.css' %}">
-
-<div class="students mt-5 mb-5 row">
+<div class="mt-5 mb-5 row">
     <div class="mb-2">
-        <h2><b>Student</b> - <i class="list">list</i></h2>
+        <h2><b>Student</b> - list</h2>
         <a class="btn btn-primary" href="{% url 'student-creation' %}">Add student</a>
     </div>
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th class="col tab"><i>Name</i></th>
-                <th class="col tab"><i>Email</i></th>
-                <th class="col tab"><i>Paid course hours</i></th>
-                <th class="col tab"><i>Taken course hours</i></th>
-                <th class="col tab"><i>Actions</i></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Paid course hours</th>
+                <th>Taken course hours</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -31,5 +27,6 @@
                 </tr>
             {% endfor %}
         </table>
+        <p>Total numbers of students: {{ students.count }}</p>
     </div>
 </div>

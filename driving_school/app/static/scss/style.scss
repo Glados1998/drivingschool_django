@@ -1,3 +1,17 @@
+@use "account-details";
+@use "form-add-course";
+@use "form-add-student";
+@use "form-add-instructor";
+@use "index";
+@use "login";
+@use "secretary";
+@use "tab";
+@use "instructor-details";
+@use "navbar";
+@use "student-details";
+@use "instructor";
+
+
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 body {

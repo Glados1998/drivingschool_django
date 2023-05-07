@@ -1,28 +1,24 @@
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'css/tab.css' %}">
-
 <div>
     <div>
         <div class="courses row">
             <h2 class="mt-5 mb-3">Courses balance:</h2>
             <div class="mb-5">
-                <p><b>Paid course hours:</b> <i>{{ logged_in_user.paid_course_hours }}</i></p>
-                <p><b>Taken course hours:</b> <i>{{ logged_in_user.taken_course_hours }}</i></p>
+                <p><b>Paid course hours:</b> {{ logged_in_user.paid_course_hours }}</p>
+                <p><b>Taken course hours:</b> {{ logged_in_user.taken_course_hours }}</p>
             </div>
         </div>
-        <div class="assigned mt-5 row">
+        <div class="mt-5 row">
             <h3 class="mb-3 mt-5">You're assigned courses:</h3>
             <div>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th class="col tab"><i>Location</i></th>
-                        <th class="col tab"><i>Start date/time</i></th>
-                        <th class="col tab"><i>End date/time</i></th>
-                        <th class="col tab"><i>Course duration</i></th>
-                        <th class="col tab"><i>Attending instructor</i></th>
-                        <th class="col tab"><i>Actions</i></th>
+                        <th class="col">Location</th>
+                        <th class="col">Start date/time</th>
+                        <th class="col">End date/time</th>
+                        <th class="col">Course duration</th>
+                        <th class="col">Attending instructor</th>
+                        <th class="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,9 +31,8 @@
                             <td class="col">{{ courses.get_instructor_details.email }}</td>
                             <td class="col">
                                 <div class="btn-group">
-                                    {% if logged_in_user.role != 1 %}
-                                    <a href="{% url 'complete-course' courses.pk %}" class="btn btn-success">Complete course</a>
-                                    {% endif %}
+                                    <a href="{% url 'complete-course' courses.pk %}" class="btn btn-success">Complete
+                                        course</a>
                                     <a href="{% url 'cancel-course' courses.pk %}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </td>
@@ -47,9 +42,9 @@
                 </table>
             </div>
         </div>
-    {% if logged_in_user.taken_course_hours >= 8 %}
-        {% include 'includes/exam_component.html' %}
-    {% endif %} 
+        {% if logged_in_user.taken_course_hours >= 8 %}
+            {% include 'includes/exam_component.html' %}
+        {% endif %}
     </div>
 </div>
 

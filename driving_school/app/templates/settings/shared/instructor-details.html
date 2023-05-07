@@ -52,7 +52,7 @@
                                 <tr>
                                     <td>{{ instructor_cours.time_slot.start_time | date:"D j M Y H:i" }}</td>
                                     <td>{{ instructor_cours.time_slot.end_time | date:"D j M Y H:i" }}</td>
-                                    <td></td>
+                                    <td>{{ instructor_cours.time_slot.duration }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

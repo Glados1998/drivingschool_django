@@ -4,25 +4,25 @@
 
 <div class="courses mt-5 mb-5 row">
     <div class="mb-2">
-        <h2><b>You're assigned courses</b> - <i class="list">list</i></h2>
+        <h2><b>You're assigned courses</b> - list</h2>
         <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
     </div>
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th class="col tab"><i>Location</i></th>
-                <th class="col tab"><i>Start date/time</i></th>
-                <th class="col tab"><i>Duration</i></th>
-                <th class="col tab"><i>Attending Student</i></th>
-                <th class="col tab"><i>Actions</i></th>
+                <th>Location</th>
+                <th>Schedule</th>
+                <th>Duration</th>
+                <th>Attending student</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for instructor_course in instructor_courses %}
                 <tr>
                     <td>{{ instructor_course.location }}</td>
-                    <td>{{ instructor_course.time_slot.start_time | date:"D j M Y H:i" }}</td>
+                    <td>{{ instructor_course.time_slot.start_time | date:"D j M Y H:i" }} - {{ instructor_course.time_slot.end_time | date:"D j M Y H:i" }}</td>
                     <td>{{ instructor_course.time_slot.duration }}</td>
                     <td>
                         {% if instructor_course.get_student_details and instructor_course.get_student_details.pk %}
@@ -37,5 +37,6 @@
             {% endfor %}
             </tbody>
         </table>
+        <p>Total numbers of Courses: {{ instructor_courses.count }}</p>
     </div>
 </div>
