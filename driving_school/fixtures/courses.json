@@ -1,0 +1,92 @@
+[
+  {
+    "model": "app.course",
+    "pk": 8,
+    "fields": {
+      "location": "Paris",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 9,
+    "fields": {
+      "location": "London",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 10,
+    "fields": {
+      "location": "Berlin",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 11,
+    "fields": {
+      "location": "Madrid",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 12,
+    "fields": {
+      "location": "Rome",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 13,
+    "fields": {
+      "location": "Amsterdam",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 14,
+    "fields": {
+      "location": "Vienna",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 15,
+    "fields": {
+      "location": "Stockholm",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  },
+  {
+    "model": "app.course",
+    "pk": 16,
+    "fields": {
+      "location": "Athens",
+      "assigned_instructor": null,
+      "assigned_student": null,
+      "time_slot": null
+    }
+  }
+]

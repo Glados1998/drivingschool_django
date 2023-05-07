@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .forms import UserForm, CourseForm, StudentForm, InstructorForm, InstructorForm, \
+from .forms import UserForm, CourseForm, StudentForm, InstructorForm, \
     SecretaryForm, AdminForm, ExamForm, ExamQuestionForm, AnswerForm
-from .models import Course, User, Exam, ExamQuestion, Answer, StudentAnswer
+from .models import Course, User, Exam, ExamQuestion, Answer
 
 
 # Create your views here.
@@ -31,6 +31,9 @@ def user_panel(request):
     student_courses = Course.objects.filter(assigned_student=student_user)
     courses = Course.objects.all()
     all_users = User.objects.all()
+    exams = Exam.objects.all()
+    exam_questions = ExamQuestion.objects.all()
+    answers = Answer.objects.all()
     all_personal = User.objects.filter(role=2 | 3 | 4)
     students = User.objects.filter(role=1)
     instructors = User.objects.filter(role=2)
@@ -40,12 +43,15 @@ def user_panel(request):
                   {'logged_in_user': request.user, 'course_add_form': CourseForm,
                    'user_add_form': UserCreationForm,
                    'user_edit_form': UserForm, 'student_add_form': StudentForm,
-                   'instructor_add_form': InstructorForm,
-                   'instructor_edit_form': InstructorForm, 'secretary_add_form': InstructorForm,
+                   'instructor_add_form': InstructorForm, 'exam_add_form': ExamForm,
+                   'exam_question_add_form': ExamQuestionForm,
+                   'answer_add_form': AnswerForm, 'instructor_edit_form': InstructorForm,
+                   'secretary_add_form': InstructorForm,
                    'secretary_edit_form': InstructorForm, 'courses': courses, 'students': students,
                    'instructors': instructors, 'admins': admins, 'secretaries': secretaries, 'all_users': all_users,
                    'all_personal': all_personal, 'instructor_courses': instructor_courses,
-                   'student_courses': student_courses})
+                   'student_courses': student_courses, 'exams': exams, 'exam_questions': exam_questions,
+                   'answers': answers})
 
 
 def logout_def(request):
@@ -311,6 +317,31 @@ def editDeleteQuestion(request, question_pk):
     else:
         exam_question_edit_form = ExamQuestionForm(instance=instance)
     return render(request, 'crud/edit-question.html', {'exam_question_edit_form': exam_question_edit_form})
+
+
+def createExamAnswer(request):
+    if request.method == 'POST':
+        exam_answer_add_form = AnswerForm(request.POST)
+        if exam_answer_add_form.is_valid():
+            new_exam_answer = exam_answer_add_form.save(commit=False)
+            new_exam_answer.save()
+            return render(request, 'app/user-dashboard.html')
+    return render(request, 'app/user-dashboard.html')
+
+
+def editDeleteAnswer(request, answer_pk):
+    instance = Answer.objects.get(pk=answer_pk)
+    if 'edit' in request.POST:
+        exam_answer_edit_form = AnswerForm(request.POST, instance=instance)
+        if exam_answer_edit_form.is_valid():
+            exam_answer_edit_form.save()
+            return render(request, 'app/user-dashboard.html')
+    elif 'delete' in request.POST:
+        instance.delete()
+        return render(request, 'app/user-dashboard.html')
+    else:
+        exam_answer_edit_form = AnswerForm(instance=instance)
+    return render(request, 'crud/edit-answer.html', {'exam_answer_edit_form': exam_answer_edit_form})
 
 
 def exam_menu(request):

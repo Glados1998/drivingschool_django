@@ -26,6 +26,7 @@
                 {% include 'settings/instructor/student-list.html' %}
             {% elif logged_in_user.role == 3 %}
                 {% include 'settings/admin/admin-users-panel.html' %}
+                {% include 'settings/admin/admin-exam-panel.html' %}
             {% elif logged_in_user.role == 4 %}
                 <link rel="stylesheet" href="{% static 'css/secretary.css' %}">
                 <div class="hello mb-5 row">
