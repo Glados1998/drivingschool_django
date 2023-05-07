@@ -66,6 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    assigned_instructor = models.ForeignKey('User', on_delete=models.SET_NULL, related_name='student_instructor', null=True, blank=True, limit_choices_to=Q(role=2))
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'

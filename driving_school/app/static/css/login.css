@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9205883036808473) 0%, rgba(80,171,200,0.8617647742690826) 100%);
+    background-attachment: fixed;
+}
+h1 {
+    font-family: 'Righteous', cursive;
+}
+p {
+    font-family: 'Righteous', cursive;
+}
+#id_username {
+    margin-left: 12%;
+    margin-top: 1%;
+}
+#id_password {
+    margin-left: 12%;
+    margin-top: 1%;
+}
+.btnLog {
+    display: flex;
+    margin: auto;
+}

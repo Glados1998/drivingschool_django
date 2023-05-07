@@ -1,12 +1,16 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container">
+<link rel="stylesheet" href="{% static 'css/instructor-details.css' %}">
+<link rel="stylesheet" href="{% static 'css/tab.css' %}">
+
+    <div class="container mt-5">
         <div class="row text-center mt-3">
             <div class="col">
                 <h1>Course details</h1>
-                <p class="lead text-muted">Here on <strong>Instructor details</strong> you can view all the information related to the selected instructor
-                    <br>name, email, and his schedule if there is one.</p>
+                <p class="lead text-muted"><i>Here on <b>Instructor details</b> you can view all the information related to the selected instructor
+                    <br>name, email, and his schedule if there is one.</i></p>
             </div>
         </div>
         <div class="accordion mt-3">
@@ -19,9 +23,9 @@
                 </h3>
                 <div id="collapseOne" class="collapse show accordion-collapse">
                     <div class="accordion-body">
-                        <h4>Instructor email: <strong> {{ instructor.email }}</strong></h4>
-                        <h4>Instructor name: {% if instructor.name %}  <strong> {{ instructor.name }}</strong>
-                        {% else %} <strong> No name </strong> {% endif %} </h4>
+                        <h3>Instructor email: <b><i>{{ instructor.email }}</i></b></h3>
+                        <h3>Instructor name: {% if instructor.name %}  <b><i>{{ instructor.name }}</i></b>
+                        {% else %} <b><i>No name</i></b> {% endif %} </h3>
                     </div>
                 </div>
             </div>
@@ -38,9 +42,9 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th class="col">Course start</th>
-                                <th class="col">Course end</th>
-                                <th class="col">Course Duration</th>
+                                <th class="col tab"><i>Course start</i></th>
+                                <th class="col tab"><i>Course end</i></th>
+                                <th class="col tab"><i>Course Duration</i></th>
                             </tr>
                             </thead>
                             <tbody>

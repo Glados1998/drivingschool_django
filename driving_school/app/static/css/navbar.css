@@ -1,0 +1,10 @@
+.nav {
+    background-color: #50ABC8;
+}
+.user {
+    margin-right: 30px;
+}
+.log {
+    width: fit-content;
+    float: right;
+}

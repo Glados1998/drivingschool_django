@@ -1,4 +1,5 @@
 {% extends 'app/base.html' %}
+{% load static %}
 {% block document_title %}
     dashboard
 {% endblock %}
@@ -6,18 +7,35 @@
 {% block content %}
     {% if logged_in_user.is_authenticated %}
         <div class="container mt-4">
-            <h2>Your dashboard</h2>
-            <p>Welcome {{ logged_in_user.email }}</p>
             {% if logged_in_user.role == 1 %}
+                <link rel="stylesheet" href="{% static 'css/account-details.css' %}">
+                <div class="hello row">
+                    <h1><b>Hello {{ logged_in_user.name }} </b>🌞</h1>
+                    <p class="mt-2"><b>Your email:</b> <i>{{ logged_in_user.email }}</i></p>
+                    <p class="dicton mt-2"><i>"A good beginning, makes a good ending."</i></p>
+                </div>
                 {% include 'settings/student/account-details.html' %}
             {% elif logged_in_user.role == 2 %}
+                <link rel="stylesheet" href="{% static 'css/instructor.css' %}">
+                <div class="hello mb-5 row">
+                    <h1><b>Hello {{ logged_in_user.name }} </b>🌞</h1>
+                    <p class="mt-2"><b>Your email:</b> <i>{{ logged_in_user.email }}</i></p>
+                    <p class="dicton mt-2"><i>"A good beginning, makes a good ending."</i></p>
+                </div>
                 {% include 'settings/instructor/course-list.html' %}
+                {% include 'settings/instructor/student-list.html' %}
             {% elif logged_in_user.role == 3 %}
                 {% include 'settings/admin/admin-users-panel.html' %}
             {% elif logged_in_user.role == 4 %}
+                <link rel="stylesheet" href="{% static 'css/secretary.css' %}">
+                <div class="hello mb-5 row">
+                    <h1><b>Hello {{ logged_in_user.name }} </b>🌞</h1>
+                    <p class="mt-2"><b>Your email:</b> <i>{{ logged_in_user.email }}</i></p>
+                    <p class="dicton mt-2"><i>"A good beginning, makes a good ending."</i></p>
+                </div>
                 {% include 'settings/secretary/instructor-list.html' %}
-                {% include 'settings/secretary/student-list.html' %}
                 {% include 'settings/secretary/course-list.html' %}
+                {% include 'settings/secretary/student-list.html' %}
             {% endif %}
         </div>
     {% else %}

@@ -78,9 +78,9 @@ class InstructorForm(forms.ModelForm):
         model = User
         fields = {'password', 'email', 'name', 'is_active'}
         widgets = {
-            'password': forms.PasswordInput(),
-            'email': forms.EmailInput(),
             'name': forms.TextInput(),
+            'email': forms.EmailInput(),
+            'password': forms.PasswordInput(),
             'is_active': forms.CheckboxInput(),
         }
         labels = {
@@ -91,10 +91,7 @@ class InstructorForm(forms.ModelForm):
             'is_active': 'Active',
         }
         help_texts = {
-            'password': 'Password must be at least 8 characters long',
-            'email': 'Please enter a valid email address',
-            'name': 'Please enter a valid name',
-            'is_active': 'Please select if the user is active',
+            'password': 'Password must be at least 8 characters long'
         }
 
 
