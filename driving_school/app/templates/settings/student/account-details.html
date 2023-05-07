@@ -1,28 +1,28 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/tab.css' %}">
+
 <div>
-    <h3>
-        Account details of {% if logged_in_user.name %} {{ logged_in_user.name }} {% else %}
-        {{ logged_in_user.email }} {% endif %}
-    </h3>
     <div>
-        <div>
-            <h4>Courses balance:</h4>
-            <div>
-                Paid course hours: {{ logged_in_user.paid_course_hours }}
-                Taken course hours: {{ logged_in_user.taken_course_hours }}
+        <div class="courses row">
+            <h2 class="mt-5 mb-3">Courses balance:</h2>
+            <div class="mb-5">
+                <p><b>Paid course hours:</b> <i>{{ logged_in_user.paid_course_hours }}</i></p>
+                <p><b>Taken course hours:</b> <i>{{ logged_in_user.taken_course_hours }}</i></p>
             </div>
         </div>
-        <div>
-            <h4>your assigned courses</h4>
+        <div class="assigned mt-5 row">
+            <h3 class="mb-3 mt-5">You're assigned courses:</h3>
             <div>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th class="col">Location</th>
-                        <th class="col">Start date/time</th>
-                        <th class="col">End date/time</th>
-                        <th class="col">Course duration</th>
-                        <th class="col">Attending instructor</th>
-                        <th class="col">Actions</th>
+                        <th class="col tab"><i>Location</i></th>
+                        <th class="col tab"><i>Start date/time</i></th>
+                        <th class="col tab"><i>End date/time</i></th>
+                        <th class="col tab"><i>Course duration</i></th>
+                        <th class="col tab"><i>Attending instructor</i></th>
+                        <th class="col tab"><i>Actions</i></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,13 +32,13 @@
                             <td class="col">{{ courses.time_slot.start_time | date:"D j M Y H:i" }}</td>
                             <td class="col">{{ courses.time_slot.end_time | date:"D j M Y H:i" }}</td>
                             <td class="col">{{ courses.time_slot.duration }}</td>
-                            <td class="col">{{ courses.get_instructor_details.email }}
-                                - {{ courses.get_instructor_details.name }}</td>
+                            <td class="col">{{ courses.get_instructor_details.email }}</td>
                             <td class="col">
                                 <div class="btn-group">
+                                    {% if logged_in_user.role != 1 %}
                                     <a href="{% url 'complete-course' courses.pk %}" class="btn btn-success">Complete course</a>
-                                    <a href="{% url 'cancel-course' courses.pk %}" class="btn btn-danger">Cancel
-                                        course</a>
+                                    {% endif %}
+                                    <a href="{% url 'cancel-course' courses.pk %}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </td>
                         </tr>

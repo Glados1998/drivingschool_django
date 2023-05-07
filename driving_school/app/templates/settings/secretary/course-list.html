@@ -1,21 +1,26 @@
-<div>
-    <h2>Courses - list</h2>
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/tab.css' %}">
+
+<div class="courses mt-5 mb-5 row">
+    <div class="mb-2">
+        <h2><b>Courses</b> - <i class="list">list</i></h2>
+        <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
+    </div>
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Location</th>
-                <th scope="col">Course schedule</th>
-                <th scope="col">Attending Student</th>
-                <th scope="col">Attending Instructor</th>
-                <th scope="col">Actions</th>
+                <th class="col tab"><i>Location</i></th>
+                <th class="col tab"><i>Course schedule</i></th>
+                <th class="col tab"><i>Attending Student</i>th>
+                <th class="col tab"><i>Attending Instructor</i></th>
+                <th class="col tab"><i>Actions</i></th>
             </tr>
             </thead>
             <tbody>
             {% for course in courses %}
                 <tr>
-                    <th scope="row">{{ course.pk }}</th>
                     <td>{{ course.location }}</td>
                     <td>{{ course.time_slot.start_time | date:"D j M Y H:i" }} - {{ course.time_slot.end_time | date:"D j M Y H:i" }}</td>
                     <td>{{ course.get_student_details.email }}</td>
@@ -26,9 +31,4 @@
             </tbody>
         </table>
     </div>
-
-    <div>
-        <a class="btn btn-primary" href="{% url 'course-creation' %}">Add course</a>
-    </div>
-
 </div>

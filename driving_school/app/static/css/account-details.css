@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9205883036808473) 0%, rgba(80,171,200,0.8617647742690826) 100%);
+    background-attachment: fixed;
+}
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 57px;
+    width: fit-content;
+    float: left;
+}
+h2 {
+    font-family: 'Righteous', cursive;
+    width: fit-content;
+    float: right;
+}
+h3 {
+    font-family: 'Righteous', cursive;
+}
+.hello {
+    margin-top: 6%;
+    width: fit-content;
+}
+.dicton {
+    font-family: 'PT Serif', serif;
+    margin-left: 5%;
+}
+.courses {
+    margin-top: -10%;
+    width: fit-content;
+    float: right;
+}
+.assigned {
+    width: 80%;
+    float: left;
+}

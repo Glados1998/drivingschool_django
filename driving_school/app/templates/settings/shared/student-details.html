@@ -1,12 +1,16 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container">
+<link rel="stylesheet" href="{% static 'css/student-details.css' %}">
+<link rel="stylesheet" href="{% static 'css/tab.css' %}">
+
+    <div class="container mt-5">
         <div class="row text-center mt-3">
             <div class="col">
                 <h1>Student details</h1>
-                <p class="lean text-muted">Here on <strong>Student details</strong> you can view all the information related to the selected student
-                    <br>name, email, paid & taken hours and his schedule if there is one.</p>
+                <p class="lean text-muted"><i>Here on <b>Student details</b> you can view all the information related to the selected student
+                    <br>name, email, paid & taken hours and his schedule if there is one.</i></p>
             </div>
         </div>
         <div class="row mt-3">
@@ -21,11 +25,11 @@
                         </h3>
                         <div id="collapseOne" class="collapse show accordion-collapse">
                             <div class="accordion-body">
-                                <h4>Student email: <strong> {{ student.email }}</strong></h4>
-                                <h4>Student name: {% if student.name %}  <strong> {{ student.name }}</strong>
-                                {% else %} <strong> No name </strong> {% endif %} </h4>
-                                <h6>Paid course hours: <strong>{{ student.paid_course_hours }}</strong> (H)</h6>
-                                <h6>Taken course hours: <strong>{{ student.taken_course_hours }}</strong> (H)</h6>
+                                <h3>Student email: <b><i>{{ student.email }}</i></b></h3>
+                                <h3>Student name: {% if student.name %}  <b><i>{{ student.name }}</i></b>
+                                    {% else %} <b><i>No name</i></b> {% endif %} </h3>
+                                <h6>Paid course hours: <b>{{ student.paid_course_hours }}</b> (H)</h6>
+                                <h6>Taken course hours: <b>{{ student.taken_course_hours }}</b> (H)</h6>
 
                             </div>
                         </div>
@@ -43,9 +47,9 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th class="col">Course start</th>
-                                        <th class="col">Course end</th>
-                                        <th class="col">Course Duration</th>
+                                        <th class="col tab"><i>Course start</i></th>
+                                        <th class="col tab"><i>Course end</i></th>
+                                        <th class="col tab"><i>Course Duration</i></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -55,12 +59,6 @@
                                             <td>{{ student_cours.time_slot.end_time | date:"D j M Y H:i" }}</td>
                                             <td>{{ student_cours.time_slot.duration}}</td>
                                         </tr>
-                                    {% empty %}
-                                        <div class="alert alert-warning">
-                                            There are no courses assigned to this student, in case of an error please
-                                            contact
-                                            an instructor or secretary.
-                                        </div>
                                     {% endfor %}
                                     </tbody>
                                 </table>

@@ -1,15 +1,18 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div>
-        <h1>Course Creation</h1>
-        <div>
-            <form action="{% url 'course-creation' %}" method="post">
-                {% csrf_token %}
-                {{ course_add_form.as_p }}
-                <input type="submit" value="Add Course">
-            </form>
-            <a href="{% url 'user-dashboard' %}">Go back</a>
-        </div>
+<link rel="stylesheet" href="{% static 'css/form-add-course.css' %}">
+
+<div class="ins mt-5">
+    <h1>Course Creation</h1>
+    <div class="addInstructor">
+        <form action="{% url 'course-creation' %}" method="post">
+            {% csrf_token %}
+            {{ course_add_form.as_p }}
+            <input class="btn btn-success" type="submit" value="Add Course">
+        </form>
+        <a href="{% url 'user-dashboard' %}" class="btn btn-primary btnAdd">Go back</a>
     </div>
+</div>
 {% endblock %}

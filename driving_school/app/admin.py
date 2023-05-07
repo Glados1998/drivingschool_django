@@ -7,7 +7,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': (
             'email', 'password', 'name', 'role', 'paid_course_hours', 'taken_course_hours', 'student_timeslots',
-            'exam_status')}),
+            'exam_status', 'assigned_instructor')}),
         ('Permissions', {'fields': (
             'is_active',
             'is_staff',
